@@ -98,7 +98,8 @@ img, svg { display: block; flex-shrink: 0; }
   color: var(--grey-main);
   font-weight: 400;
 }
-.tooltip--light p + p { margin-top: 17px; } /* пустая строка между абзацами */
+.tooltip--light p + p { margin-top: 4px; }        /* строки списка цен */
+.tooltip--light .tip-intro + p { margin-top: 17px; } /* пустая строка после вступления */
 .tooltip--light b { font-weight: 500; }
 
 /* ---------- icon button (24px icon, darkens on hover) ---------- */

@@ -133,15 +133,49 @@ document.querySelectorAll('.story img') /* после клонирования �
   addEventListener('resize', snap);
 })();
 
-/* появление блока «Start with a name and company»: один раз, когда видно 50% блока */
+/* появление блока «Start with a name and company»: один раз, когда он занял заметную часть экрана */
 (function () {
   var block = document.querySelector('.flow2');
   if (!block || matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) return;
   block.classList.add('is-anim');
+  // старт, когда блок занимает ≥ 40% экрана (на мобильном блок выше экрана — 50% самого блока недостижимо)
   var io = new IntersectionObserver(function (entries) {
-    if (!entries[0].isIntersecting) return;
+    var e = entries[0];
+    var need = Math.min(e.boundingClientRect.height, innerHeight) * 0.4;
+    if (e.intersectionRect.height < need) return;
     io.disconnect();
     requestAnimationFrame(function () { block.classList.add('is-play'); });
-  }, { threshold: 0.5 });
+  }, { threshold: [0, .1, .2, .3, .4, .5, .6, .7, .8, .9, 1] });
   io.observe(block);
+})();
+
+
+/* мобильный: правая карточка блока «Start with a name and company» (530px, координаты из макета)
+   масштабируется под ширину экрана */
+(function () {
+  var box = document.querySelector('.f2-result');
+  if (!box) return;
+  var mq = matchMedia('(max-width: 767px)');
+  function fit() {
+    if (!mq.matches) { box.style.removeProperty('--s'); return; }
+    var cs = getComputedStyle(box.parentNode);
+    var inner = box.parentNode.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
+    var s = Math.min(1, (inner - 12) / 530); // −12: запас под повёрнутую заднюю карточку
+    box.style.setProperty('--s', s.toFixed(4));
+  }
+  fit();
+  addEventListener('resize', fit);
+})();
+
+/* мобильный: «Proceed to payment» прилипает к низу экрана, пока карточки покупки на экране,
+   а кнопка в самой карточке ещё не видна */
+(function () {
+  var bar = document.getElementById('payBar');
+  var form = document.querySelector('.plans-form');
+  var own = document.querySelector('.price-card .price-card__btn');
+  if (!bar || !form || !own || !('IntersectionObserver' in window)) return;
+  var formIn = false, ownIn = false;
+  function update() { bar.classList.toggle('is-visible', formIn && !ownIn); }
+  new IntersectionObserver(function (e) { formIn = e[0].isIntersecting; update(); }).observe(form);
+  new IntersectionObserver(function (e) { ownIn = e[0].isIntersecting; update(); }).observe(own);
 })();

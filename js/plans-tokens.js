@@ -3,7 +3,8 @@
   var slider = document.getElementById('tokensSlider');
   if (!slider) return;
   var STEPS = [0, 1000, 2000, 5000, 10000, 20000, 50000];
-  var SEG = 107, WIDTH = 640; // отрезок 105 + зазор 2
+  var GAP = 2, WIDTH = 640, SEG = 107; // пересчитываются по реальной ширине шкалы (адаптив)
+  function measure() { WIDTH = slider.clientWidth; SEG = (WIDTH + GAP) / (STEPS.length - 1); }
   var price = parseFloat(document.getElementById('tokens').dataset.price) || 0.02;
   var segs = slider.querySelectorAll('.tokens__seg');
   var thumb = slider.querySelector('.tokens__thumb');
@@ -74,5 +75,7 @@
     if (k === 'End') { set(STEPS.length - 1); e.preventDefault(); }
   });
 
+  measure();
+  addEventListener('resize', function () { measure(); set(current); });
   set(current);
 })();

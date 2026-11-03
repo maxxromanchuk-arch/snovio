@@ -25,7 +25,7 @@
 
 <!-- ============ Top navigation (вариант для Plans: без меню разделов, без левой навигации) ============ -->
 <header class="topnav topnav--plain">
-  <a class="topnav__brand" href="prospects.html" aria-label="Snov.io"><img src="icons/logo.svg" width="110" height="28" alt=""></a>
+  <a class="topnav__brand" href="prospects.html" aria-label="Snov.io"><img class="topnav__brand-full" src="icons/logo.svg" width="110" height="28" alt=""><img class="topnav__brand-short" src="icons/logo-s.svg" width="42" height="42" alt=""></a>
   <a class="topnav__back icon-btn" href="prospects.html" data-back aria-label="Back"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></a>
   <!-- скрыто: кнопка To checkout (стили в plans.css) -->
   <!-- <a class="btn-checkout" href="#checkout"><span class="btn-checkout__count">5</span>To checkout</a> -->
@@ -41,9 +41,11 @@
     <div class="plans-hero__glow" aria-hidden="true"></div>
     <h1 class="plans-hero__title">From missing fields to enriched leads<br><span class="plans-hero__accent">from $0.004 per field</span></h1>
     <div class="product-tabs" role="tablist" aria-label="Products">
+      <button class="product-tabs__nav product-tabs__nav--prev" type="button" aria-label="Previous product"><svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></button>
       <button class="product-tab" role="tab" aria-selected="false"><img src="icons/sales-suite-16.svg" width="16" height="16" alt="">Sales Suite</button>
       <button class="product-tab" role="tab" aria-selected="false"><img src="icons/linkedin-16.svg" width="16" height="16" alt="">LinkedIn Automation</button>
       <button class="product-tab is-active" role="tab" aria-selected="true"><img src="icons/enrichment-token-16.svg" width="16" height="16" alt="">Phone and Data Enrichment</button>
+      <button class="product-tabs__nav product-tabs__nav--next" type="button" aria-label="Next product"><svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></button>
     </div>
   </section>
 
@@ -55,8 +57,12 @@
       <p class="buy-card__sub">Collect phones, emails, lead and company data.</p>
       <!-- содержимое хинта у «How many tokens do you need?» -->
       <div class="tip-source" id="tokensTip" hidden>
-        <p>Each enrichment method costs a different number of tokens, depending on data provider and request complexity.</p>
-        <p><b>Email address:</b> 5 tokens<br><b>Phone number:</b> starting at 10 tokens<br><b>Email verification:</b> 0.5 token<br><b>LinkedIn and Company info:</b> starting at 0.2 per data point or 1 token for full profile.<br><b>AI-powered enrichments:</b> price varies based on the request complexity and the selected AI model.</p>
+        <p class="tip-intro">Each enrichment method costs a different number of tokens, depending on data provider and request complexity.</p>
+        <p><b>Email address:</b> 5 tokens</p>
+        <p><b>Phone number:</b> starting at 10 tokens</p>
+        <p><b>Email verification:</b> 0.5 token</p>
+        <p><b>LinkedIn and Company info:</b> starting at 0.2 per data point or 1 token for full profile.</p>
+        <p><b>AI-powered enrichments:</b> price varies based on the request complexity and the selected AI model.</p>
       </div>
       <div class="tokens" id="tokens" data-price="0.02">
         <div class="tokens__head">
@@ -81,6 +87,8 @@
       <a class="btn price-card__btn" href="#checkout">Proceed to payment</a>
     </aside>
   </section>
+  <div class="pay-bar" id="payBar" aria-hidden="true"><a class="btn price-card__btn" href="#checkout" tabindex="-1">Proceed to payment</a></div>
+
   <!-- ============ «Start with a name and company» — новый вариант белого блока ============ -->
   <section class="flow2">
     <div class="flow2__frame">
@@ -144,7 +152,7 @@
   <!-- ============ Клиенты: заголовок + бегущая строка логотипов ============ -->
   <section class="clients">
     <div class="clients__card">
-      <h2 class="clients__title">Over <span class="clients__accent">300,000</span> businesses are scaling their<br>sales with Snov.io</h2>
+      <h2 class="clients__title">Over <span class="clients__accent">300,000</span> businesses are scaling their <br>sales with Snov.io</h2>
       <div class="logos" aria-label="Our clients">
         <div class="logos__track">
           <ul class="logos__list">
@@ -321,8 +329,8 @@
   <section class="faq">
     <h2 class="section-title">Frequently asked questions</h2>
     <div class="faq__list">
-      <div class="faq__item">
-        <button class="faq__q" aria-expanded="false">What data can I get with Snov.io Enrichment?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+      <div class="faq__item is-open">
+        <button class="faq__q" aria-expanded="true">What data can I get with Snov.io Enrichment?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
         <div class="faq__a"><div class="faq__body"><p>Snov.io Enrichment currently covers <b>50+ data points</b>, including:</p>
 <ul><li>Phone number</li><li>Email address</li><li>Email verification status</li><li>Prospect info (industry, job position, employment history, bio, languages, certificates, similar profiles, and more)</li><li>Company info (funding, location, size, Crunchbase and LinkedIn links, company website, similar and affiliated companies, and more)</li></ul>
 <p><a class="link" href="https://snov.io/knowledgebase/prospect-enrichment-actions/" target="_blank" rel="noopener">Here’s the full list of data points</a>.</p>
@@ -333,8 +341,8 @@
         <button class="faq__q" aria-expanded="false">Can I try it for free?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
         <div class="faq__a"><div class="faq__body"><p>Of course! Each Snov.io account comes with free monthly enrichment tokens, from 25 tokens on a Free plan to 750 tokens on Ultra Sales Suite plans. You can use them to test and try any enrichment action.</p></div></div>
       </div>
-      <div class="faq__item is-open">
-        <button class="faq__q" aria-expanded="true">How does Snov.io Enrichment pricing compare to other tools?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">How does Snov.io Enrichment pricing compare to other tools?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
         <div class="faq__a"><div class="faq__body"><p>With other enrichment tools $49/month often becomes $600-1,000+/month for active teams. With Snov.io your billing is predictable with $0.02 per token, scalable and stackable. With data points, we don't charge for the search, <b>we only charge for when results are provided</b>. With AI enrichments, you have the choice of different providers and models for <b>better spending control</b>. And, as always, <b>team seats are unlimited</b>, no extra payment.</p></div></div>
       </div>
       <div class="faq__item">
@@ -405,14 +413,26 @@
   addEventListener('resize', function () { snapToPixel(tabs); });
 
   /* переключатель продуктов */
-  document.querySelector('.product-tabs').addEventListener('click', function (e) {
-    var tab = e.target.closest('.product-tab');
-    if (!tab) return;
-    this.querySelectorAll('.product-tab').forEach(function (t) {
+  /* переключатель продуктов (на мобильном — карусель со стрелками) */
+  var tabList = Array.prototype.slice.call(tabs.querySelectorAll('.product-tab'));
+  function activate(tab) {
+    tabList.forEach(function (t) {
       var on = t === tab;
       t.classList.toggle('is-active', on);
       t.setAttribute('aria-selected', String(on));
     });
+    snapToPixel(tabs);
+  }
+  tabs.addEventListener('click', function (e) {
+    var nav = e.target.closest('.product-tabs__nav');
+    if (nav) {
+      var i = tabList.findIndex(function (t) { return t.classList.contains('is-active'); });
+      var step = nav.classList.contains('product-tabs__nav--prev') ? -1 : 1;
+      activate(tabList[(i + step + tabList.length) % tabList.length]);
+      return;
+    }
+    var tab = e.target.closest('.product-tab');
+    if (tab) activate(tab);
   });
 </script>
 </body>

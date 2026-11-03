@@ -8,6 +8,7 @@ body.no-leftnav { background: var(--grey-zircon); }
 /* ---------- header (вариант Plans) ---------- */
 .topnav--plain .topnav__brand { display: block; align-self: flex-start; margin: 23px 0 0 20px; }   /* лого 20px от края */
 .topnav--plain .topnav__brand img { width: 110px; height: 28px; }
+.topnav__brand-short, .product-tabs__nav, .pay-bar { display: none; }
 .topnav--plain .topnav__back { margin-left: 15px; }                       /* иконка на x=150: 20px от лого (+5px поле кнопки) */
 .topnav--plain .account { gap: 17px; }
 
@@ -102,7 +103,7 @@ body.no-leftnav { background: var(--grey-zircon); }
 .tokens__amount b { font-size: 20px; font-weight: 500; }
 
 /* шкала: 6 отрезков по 105px с зазором 2px, 7 делений */
-.tokens__scale { position: relative; width: 640px; height: 49px; margin-top: 27px; outline: none; cursor: pointer; touch-action: none; }
+.tokens__scale { position: relative; width: 100%; max-width: 640px; height: 49px; margin-top: 27px; outline: none; cursor: pointer; touch-action: none; }
 .tokens__scale:focus-visible { outline: 2px solid var(--purple); outline-offset: 6px; border-radius: 4px; }
 .tokens__track { display: flex; gap: 2px; height: 8px; }
 .tokens__seg { position: relative; flex: 1; border-radius: 8px; background: var(--grey-zircon); }
@@ -118,9 +119,9 @@ body.no-leftnav { background: var(--grey-zircon); }
 .tokens__seg.is-on:nth-child(4) { background: linear-gradient(90deg, #ff6e7c, #f56a9c); }
 .tokens__seg.is-on:nth-child(5) { background: linear-gradient(90deg, #ee68aa, #e067c9); }
 .tokens__seg.is-on:nth-child(6) { background: linear-gradient(90deg, #da67d2, #ce69ec); }
-.tokens__step { position: absolute; top: 0; left: calc(var(--i) * 107px - 2px); width: 2px; height: 49px; } /* деление — в зазоре 2px между отрезками */
+.tokens__step { position: absolute; top: 0; left: calc(var(--i) * (100% + 2px) / 6 - 2px); width: 2px; height: 49px; } /* деление — в зазоре 2px между отрезками */
 .tokens__step[data-step="0"] { left: 0; }
-.tokens__step[data-step="6"] { left: 638px; }
+.tokens__step[data-step="6"] { left: calc(100% - 2px); }
 .tokens__tick { position: absolute; left: 0; top: 14px; width: 2px; height: 4px; border-radius: 1px; background: #dde2e9; }
 .tokens__label { position: absolute; top: 27px; left: 1px; transform: translateX(-50%); font-size: 12px; font-weight: 500; letter-spacing: .24px; white-space: nowrap; }
 .tokens__step[data-step="0"] .tokens__label { left: 0; transform: none; }
@@ -621,4 +622,124 @@ body.no-leftnav { background: var(--grey-zircon); }
     opacity 1s cubic-bezier(.33, 0, .2, 1),
     filter 1.4s cubic-bezier(.22, 1, .36, 1),
     transform 1.6s cubic-bezier(.22, 1, .36, 1); /* все стартуют вместе; поворот чуть дольше */
+}
+
+
+/* =====================================================================
+   Мобильная версия (≤ 767px) — по образцу живой app.snov.io/pricing-plans
+   ===================================================================== */
+@media (max-width: 767px) {
+  body.no-leftnav { min-width: 0; overflow-x: hidden; --topnav-h: 56px; }
+
+  /* шапка: короткий логотип, стрелка назад, справа только аватар */
+  .topnav--plain .topnav__brand { align-self: flex-start; margin: 7px 0 0 7px; } /* 7px: «S» совпадает по положению с буквой S полного логотипа — лого не «прыгает» */
+  .topnav--plain .topnav__brand-full { display: none; }
+  .topnav--plain img.topnav__brand-short { display: block; width: 42px; height: 42px; }
+  .topnav--plain .topnav__back { margin-left: 8px; }
+  .topnav--plain .account { margin-right: 16px; }
+  .topnav--plain .account__notif { display: none; }
+
+  /* hero */
+  .plans-hero { padding: 24px 16px 0; }
+  .plans-hero__title { font-size: 22px; line-height: 28px; }
+
+  /* переключатель → карусель: один активный таб и стрелки */
+  .product-tabs { justify-content: space-between; width: 100%; margin-top: 24px; translate: none !important; }
+  .product-tab:not(.is-active) { display: none; }
+  .product-tab.is-active { flex: 1; justify-content: center; background: none; }
+  .product-tabs__nav { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: 50%; }
+  .product-tabs__nav .i { color: var(--grey-dove); }
+  .product-tabs__nav--prev .i { transform: rotate(180deg); }
+
+  /* покупка: карточки друг под другом */
+  .plans-form { flex-direction: column; gap: 16px; padding: 24px 16px 0; }
+  .buy-card, .price-card { width: 100%; height: auto; }
+  .buy-card { padding: 24px 16px 16px; }
+  .buy-card__title { font-size: 20px; text-align: center; }
+  .buy-card__sub { text-align: center; }
+  .tokens { height: auto; margin-top: 24px; padding: 20px 16px 16px; }
+  .tokens__head { align-items: center; gap: 12px; height: auto; }
+  .tokens__q { display: block; font-size: 12px; }
+  .tokens__q .icon-btn { display: inline-flex; vertical-align: middle; margin-left: 2px; }
+  .tokens__amount { flex-shrink: 0; white-space: nowrap; }
+  .tokens__label { font-size: 11px; letter-spacing: 0; }
+  .price-card { padding: 24px 16px; }
+
+  /* липкая кнопка оплаты */
+  .pay-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 25;
+    display: block;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+    background: var(--white);
+    box-shadow: 0 -4px 12px rgba(25, 36, 53, .06);
+    transform: translateY(100%);
+    transition: transform var(--dur) var(--ease);
+  }
+  .pay-bar.is-visible { transform: none; }
+  .pay-bar .price-card__btn { margin-top: 0; }
+
+  /* «Start with a name and company»: карточки в колонку, стрелка вниз */
+  .flow2 { height: auto; }
+  .flow2__frame { position: static; width: auto; height: auto; margin: 0; padding: 48px 16px 0; display: flex; flex-direction: column; align-items: center; }
+  .flow2__frame > * { position: relative; left: auto; top: auto; }
+  .f2-title { font-size: 22px; line-height: 28px; }
+  .f2-sub { width: auto; margin-top: 12px; }
+  .f2-start { margin-top: 32px; }
+  .f2-arrow { margin: 16px 0; }
+  .f2-arrow .i { transform: rotate(270deg); }
+  .f2-result {
+    width: 530px;
+    transform: scale(var(--s, 1));
+    transform-origin: 50% 0;
+    margin-bottom: calc(426px * (var(--s, 1) - 1) + 24px); /* компенсируем высоту после масштаба */
+    align-self: center;
+  }
+
+  /* клиенты */
+  .clients { padding-top: 64px; }
+  .clients__card { height: auto; padding: 32px 0; }
+  .clients__title { padding: 0 16px; font-size: 22px; line-height: 28px; letter-spacing: -.5px; }
+  .clients__title br { display: none; } /* перед <br> стоит пробел — слова не слипаются */
+  .logos { position: relative; top: auto; margin-top: 24px; }
+  .logos::before, .logos::after { width: 40px; }
+
+  /* демо */
+  .demo-cta-wrap { padding: 48px 0 64px; }
+  .demo-cta { flex-direction: column; height: auto; padding: 16px 16px 24px; border-radius: 24px; }
+  .demo-cta__media { position: static; }
+  .demo-cta__body { flex-direction: column; gap: 20px; margin-top: 20px; text-align: center; }
+  .demo-cta__text { width: auto; }
+  .demo-cta__title { font-size: 20px; line-height: 24px; }
+  .demo-cta__btn { width: 100%; }
+
+  /* отзывы: карточка на всю ширину, цифра под цитатой */
+  .stories { padding-bottom: 64px; }
+  .section-title { padding: 0 16px; font-size: 24px; line-height: 30px; }
+  .stories__viewport { margin-top: 32px; }
+  .story { flex-direction: column; align-items: stretch; gap: 24px; width: calc(100vw - 32px); height: auto; padding: 24px; }
+  .story__person { width: auto; gap: 20px; }
+  .story__quote { font-size: 16px; }
+  .story__data { padding: 20px 0 0; border-left: 0; border-top: 1px solid var(--line); }
+  .story__stat { font-size: 40px; letter-spacing: -2px; }
+
+  /* FAQ */
+  .faq { padding-bottom: 64px; }
+  .faq__list { margin-top: 32px; }
+  .faq__item { border-radius: 20px; }
+  .faq__q { padding: 16px; font-size: 16px; letter-spacing: -.2px; }
+  .faq__body { padding: 0 16px; font-size: 14px; }
+  .faq__item.is-open .faq__body { padding-bottom: 16px; margin-top: -4px; }
+
+  /* футер */
+  .plans-footer { height: auto; }
+  .plans-footer__inner { display: flex; flex-direction: column; align-items: center; padding: 40px 16px 48px; }
+  .plans-footer__img, .plans-footer__body { position: static; }
+  .plans-footer__body { margin-top: 24px; text-align: center; }
+  .plans-footer__title { width: auto; font-size: 28px; line-height: 1.25; }
+  .plans-footer__sub { width: auto; font-size: 15px; }
+  .plans-footer__btn { width: 100%; margin-top: 24px; }
 }
