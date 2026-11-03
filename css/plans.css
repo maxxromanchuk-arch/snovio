@@ -1,0 +1,624 @@
+/* =========================================================
+   plans.css — страница Plans
+   ========================================================= */
+
+body.no-leftnav { background: var(--grey-zircon); }
+.plans { padding-top: var(--topnav-h); }
+
+/* ---------- header (вариант Plans) ---------- */
+.topnav--plain .topnav__brand { display: block; align-self: flex-start; margin: 23px 0 0 20px; }   /* лого 20px от края */
+.topnav--plain .topnav__brand img { width: 110px; height: 28px; }
+.topnav--plain .topnav__back { margin-left: 15px; }                       /* иконка на x=150: 20px от лого (+5px поле кнопки) */
+.topnav--plain .account { gap: 17px; }
+
+.btn-checkout {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  height: 34px;
+  margin-left: auto;
+  padding: 0 20px 0 14px;
+  border-radius: var(--radius);
+  background: var(--purple);
+  box-shadow: var(--shadow-btn-hover);
+  color: var(--white);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.btn-checkout:hover { background: var(--purple-medium); }
+.btn-checkout + .account { margin-left: 24px; }
+.btn-checkout__count {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  margin: 0 3px;
+  border-radius: 50%;
+  background: var(--white);
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, .3);
+  color: var(--grey-main);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ---------- hero ---------- */
+.plans-hero { position: relative; display: flex; flex-direction: column; align-items: center; padding-top: 29px; overflow: hidden; }
+/* свечение под шапкой: картинка 1536×251 (@2x), всегда по центру */
+.plans-hero__glow {
+  position: absolute;
+  inset: 0 0 auto;
+  height: 251px;
+  background: url("../img/plans-hero-glow.png") center top / 1536px 251px no-repeat;
+  pointer-events: none;
+}
+.plans-hero__title { position: relative; font-size: 34px; font-weight: 700; line-height: 40px; text-align: center; }
+.plans-hero__accent { color: var(--purple); }
+
+/* ---------- переключатель продуктов ---------- */
+.product-tabs { position: relative; display: flex; align-items: center; gap: 4px; height: 48px; margin-top: 29px; padding: 4px; border-radius: 77px; background: var(--white); }
+.product-tab {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 16px;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+.product-tab:not(.is-active):hover { background: var(--grey-desert); } /* TODO: ховер по макету */
+.product-tab.is-active { background: linear-gradient(90deg, #e2fc8d 0%, #b0ef8a 100%); }
+
+/* ---------- форма (заглушка) ---------- */
+/* ---------- форма: выбор пакета + Price breakdown ---------- */
+.plans-form { display: flex; justify-content: center; gap: 16px; padding: 32px 16px 0; }
+.buy-card, .price-card {
+  position: relative;
+  height: 322px;
+  border-radius: 24px;
+  background: var(--white);
+  box-shadow: 0 0 0 1px rgba(25, 36, 53, .05), 0 4px 12px rgba(25, 36, 53, .06);
+}
+.buy-card { width: 784px; padding: 40px; overflow: hidden; }
+.buy-card::before { /* свечение из макета: картинка 800×338 (@2x), карточка внутри неё со сдвигом 8/4px */
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: -4px;
+  width: 800px;
+  height: 338px;
+  background: url("../img/plans-buy-card-bg.png") 0 0 / 800px 338px no-repeat;
+  pointer-events: none;
+}
+.buy-card > * { position: relative; }
+.buy-card__title { font-size: 24px; font-weight: 600; line-height: normal; }
+.buy-card__sub { margin-top: 8px; line-height: 1.5; }
+
+.tokens { height: 154px; margin-top: 32px; padding: 26px 32px 0; border-radius: 16px; background: var(--white); }
+.tokens__head { display: flex; align-items: flex-end; justify-content: space-between; height: 26px; }
+.tokens__q { display: flex; align-items: center; gap: 4px; font-weight: 500; line-height: 1.5; }
+.tokens__amount { font-size: 13px; font-weight: 500; }
+.tokens__amount b { font-size: 20px; font-weight: 500; }
+
+/* шкала: 6 отрезков по 105px с зазором 2px, 7 делений */
+.tokens__scale { position: relative; width: 640px; height: 49px; margin-top: 27px; outline: none; cursor: pointer; touch-action: none; }
+.tokens__scale:focus-visible { outline: 2px solid var(--purple); outline-offset: 6px; border-radius: 4px; }
+.tokens__track { display: flex; gap: 2px; height: 8px; }
+.tokens__seg { position: relative; flex: 1; border-radius: 8px; background: var(--grey-zircon); }
+.tokens__seg::after { content: ""; position: absolute; inset: 0; border-radius: inherit; background: rgba(255, 255, 255, .7); opacity: 0; transition: opacity .15s; }
+.tokens__seg.is-preview::after { opacity: 1; } /* hover на меньший пакет: белый 70% поверх */
+.tokens__seg { transition: background-color .15s; }
+.tokens__seg.is-preview-up { background-color: #e5dcff; } /* hover на больший пакет */
+/* цвета отрезков по Figma (node 6923:44095): жёлтый → оранжевый → коралловый → розовый → фуксия → сиреневый.
+   TODO: цвета сняты на глаз со скрина — в макете это SVG */
+.tokens__seg.is-on:nth-child(1) { background: linear-gradient(90deg, #ffd883, #ffb57b); }
+.tokens__seg.is-on:nth-child(2) { background: linear-gradient(90deg, #ffb27a, #ff8f72); }
+.tokens__seg.is-on:nth-child(3) { background: linear-gradient(90deg, #ff8a70, #ff6e6e); }
+.tokens__seg.is-on:nth-child(4) { background: linear-gradient(90deg, #ff6e7c, #f56a9c); }
+.tokens__seg.is-on:nth-child(5) { background: linear-gradient(90deg, #ee68aa, #e067c9); }
+.tokens__seg.is-on:nth-child(6) { background: linear-gradient(90deg, #da67d2, #ce69ec); }
+.tokens__step { position: absolute; top: 0; left: calc(var(--i) * 107px - 2px); width: 2px; height: 49px; } /* деление — в зазоре 2px между отрезками */
+.tokens__step[data-step="0"] { left: 0; }
+.tokens__step[data-step="6"] { left: 638px; }
+.tokens__tick { position: absolute; left: 0; top: 14px; width: 2px; height: 4px; border-radius: 1px; background: #dde2e9; }
+.tokens__label { position: absolute; top: 27px; left: 1px; transform: translateX(-50%); font-size: 12px; font-weight: 500; letter-spacing: .24px; white-space: nowrap; }
+.tokens__step[data-step="0"] .tokens__label { left: 0; transform: none; }
+.tokens__step[data-step="6"] .tokens__label { left: auto; right: 0; transform: none; }
+.tokens__thumb { /* ореол 30 + круг 22, центр — на делении; поверх делений */
+  position: absolute;
+  z-index: 1;
+  top: -11px;
+  left: 0;
+  width: 30px;
+  height: 30px;
+  margin-left: -15px;
+  transition: left .2s var(--ease);
+}
+.tokens__thumb { pointer-events: auto; cursor: grab; }
+/* слои ползунка: белый круг 30 → градиентный круг 22 → звезда 16 (не масштабируется) */
+.tokens__thumb-ring, .tokens__thumb-knob { position: absolute; left: 50%; top: 50%; border-radius: 50%; transform: translate(-50%, -50%); transition: transform .15s var(--ease); }
+.tokens__thumb-ring { width: 30px; height: 30px; background: var(--white); }
+.tokens__thumb-knob {
+  width: 22px;
+  height: 22px;
+  background: linear-gradient(180deg, #ffdd7e 0%, #ff6966 100%);
+  box-shadow:
+    inset 0 -1px 0 0 #f6695c,
+    inset 0 1px 0 0 rgba(255, 255, 255, .31),
+    0 1px 1px 0 rgba(236, 116, 98, .4);
+}
+.tokens__thumb-star { position: absolute; left: 7px; top: 7px; display: block; }
+/* hover / перетаскивание: оба круга +1px с каждой стороны (30→32, 22→24) */
+.tokens__thumb:hover .tokens__thumb-ring, .tokens__scale.is-dragging .tokens__thumb-ring { transform: translate(-50%, -50%) scale(calc(32 / 30)); }
+.tokens__thumb:hover .tokens__thumb-knob, .tokens__scale.is-dragging .tokens__thumb-knob { transform: translate(-50%, -50%) scale(calc(24 / 22)); }
+.tokens__scale.is-dragging .tokens__thumb { cursor: grabbing; }
+
+.price-card { width: 380px; padding: 40px; }
+.price-card__title { font-size: 16px; font-weight: 700; line-height: normal; }
+.price-card__row { display: flex; align-items: baseline; justify-content: space-between; }
+.price-card__row--total { margin-top: 16px; font-size: 16px; font-weight: 700; }
+.price-card__sum { font-size: 20px; }
+.price-card__note { margin-top: 12px; color: var(--grey-dove); }
+.price-card__row--exp { margin-top: 16px; padding: 16px 0; border-top: 1px dashed var(--line); border-bottom: 1px dashed var(--line); color: var(--grey-dove); }
+.price-card__row--exp b { color: var(--grey-main); font-weight: 500; }
+.price-card__pay { margin-top: 16px; }
+.price-card__pay a { color: var(--purple); }
+.price-card__btn { width: 100%; height: 34px; margin-top: 26px; border: 0; background: var(--purple); color: var(--white); font-weight: 700; box-shadow: 0 1px 1px rgba(0, 0, 0, .08); }
+.price-card__btn:hover { border: 0; background: var(--purple-medium); }
+
+/* ---------- «Your entire prospecting workflow» — белый блок с анимацией появления ----------
+   Перенесено из snovio-enrichment-page.html. Координаты внутри кадра 1536×729 — из Figma. */
+.flow { position: relative; overflow: hidden; height: 750px; background: #fff; }
+.flow__frame {
+  position: absolute;
+  left: 50%;
+  top: 2px;
+  width: 1536px;
+  height: 729px;
+  margin-left: -768px;
+  transform-origin: 50% 0;
+  font-family: Roboto, sans-serif;
+  color: var(--grey-main);
+}
+.flow .abs { position: absolute; }
+
+  /* Heading */
+  .flow .title {
+    left: 416px; top: 80px; width: 704px; margin: 0;
+    font-size: 28px; font-weight: 600; line-height: 1.3; text-align: center;
+  }
+
+  /* Steps */
+  .flow .step { width: 278px; top: 146px; }
+  .flow .step .num {
+    position: absolute; left: 0; top: 0; width: 18px; height: 32px;
+    font-family: Geist, Roboto, sans-serif; font-weight: 900; font-size: 24px; line-height: normal;
+    padding: 1px 0 0 1px;
+  }
+  .flow .step .num.one { padding-left: 3px; }
+  .flow .step h3 { position: absolute; left: 30px; top: 0; margin: 0; font-size: 13px; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+  .flow .step p { position: absolute; left: 30px; top: 24px; width: 252px; margin: 0; font-size: 13px; line-height: 1.3; color: var(--grey-dove); }
+
+  /* Background tiles 144 × 88 */
+  .flow .tile { width: 144px; height: 88px; border-radius: 20px; filter: blur(var(--b, 0px)); }
+  /* type 1 (711:4695): almost white, soft blurred edge */
+  .flow .tile.t1 { background: #fcfcfd; --b: 2px; }
+  /* type 2 (711:4693): light grey, soft vertical gradient */
+  .flow .tile.t2 { background: linear-gradient(180deg, #fafafb 0%, #f6f7f8 100%); --b: 1px; }
+  /* type 3 (711:4697): flat light grey */
+  .flow .tile.t3 { background: #f8f9fa; }
+
+  /* Central form 300 × 322 */
+  .flow .form {
+    left: 618px; top: 313px; width: 300px; height: 322px;
+    background: #fff; border-radius: 32px;
+    box-shadow: 0 12px 24px rgba(25, 36, 53, .08), 0 0 0 1px rgba(25, 36, 53, .04);
+  }
+  .flow .bolt {
+    left: 123px; top: 32px; width: 54px; height: 54px; border-radius: 14px;
+    border: 1px solid rgba(240, 190, 110, .35);
+    background: linear-gradient(44.4deg, #ffdcab 19.4%, #ffecbf 82.6%);
+    box-shadow: 0 6px 12px #ffe8c7;
+    display: grid; place-items: center;
+  }
+  .flow .dot { border: 0; border-radius: 2px; } /* сброс глобального .dot из layout.css */
+  .flow .row-line { left: 24px; width: 252px; height: 1px; background: #eceef1; }
+  .flow .circle {
+    left: 26px; width: 32px; height: 32px; border-radius: 50%; background: #f3f4f6;
+    display: grid; place-items: center;
+  }
+  .flow .bar { left: 70px; height: 8px; border-radius: 4px; background: #d6d9dd; }
+  .flow .bar.sm { height: 6px; border-radius: 3px; background: #e6e8eb; }
+  .flow .more {
+    left: 88px; top: 272px; height: 20px;
+    display: flex; align-items: center; gap: 2px;
+    font-size: 13px; font-weight: 400; line-height: 1.5; color: #333231; white-space: nowrap;
+  }
+  .flow .more svg { flex: none; }
+
+  /* Feature cards 206 × 80 */
+  .flow .feat {
+    width: 206px; height: 80px; border-radius: 12px; background: #fff;
+    box-shadow: 0 12px 24px rgba(25, 36, 53, .08), 0 0 0 1px rgba(25, 36, 53, .04);
+  }
+  .flow .feat h4 { position: absolute; left: 36px; top: 12px; margin: 0; font-size: 13px; font-weight: 700; line-height: 1.5; white-space: nowrap; color: #192435; }
+  .flow .feat .ico { position: absolute; left: 14px; top: 14px; width: 16px; height: 16px; }
+  .flow .feat p { position: absolute; left: 18px; top: 36px; width: 170px; max-height: 32px; margin: 0; font-size: 12px; line-height: 1.3; color: #666e7a;
+    display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+
+  /* ---------- Animation ---------- */
+  /* Main card: rises 10px, fades in and comes out of blur */
+  .flow__frame.anim .form { opacity: 0; filter: blur(12px); transform: translateY(10px); }
+  .flow__frame.anim.play .form {
+    opacity: 1; filter: none; transform: none;
+    transition:
+      opacity 1.05s cubic-bezier(.33, 0, .2, 1),
+      filter 1.2s cubic-bezier(.22, 1, .36, 1),
+      transform 1.2s cubic-bezier(.22, 1, .36, 1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .flow__frame.anim .form { opacity: 1; filter: none; transform: none; transition: none !important; }
+    .flow__frame.anim .bar { transform: none !important; transition: none !important; }
+    .flow__frame.anim .feat { opacity: 1; filter: none; transform: none; transition: none !important; }
+    .flow__frame.anim .tile { opacity: 1; filter: blur(var(--b, 0px)); transition: none !important; }
+  }
+
+  /* Background tiles: random order, fade in out of blur */
+  .flow__frame.anim .tile { opacity: 0; filter: blur(10px); }
+  .flow__frame.anim.play .tile {
+    opacity: 1; filter: blur(var(--b, 0px));
+    transition:
+      opacity .9s cubic-bezier(.33, 0, .2, 1) var(--d, 0s),
+      filter 1.1s cubic-bezier(.22, 1, .36, 1) var(--d, 0s);
+  }
+
+  /* Feature cards: focus pull, one after another */
+  .flow__frame.anim .feat { opacity: 0; filter: blur(16px); transform: scale(1.08); }
+  .flow__frame.anim.play .feat {
+    opacity: 1; filter: none; transform: none;
+    transition:
+      opacity .8s cubic-bezier(.33, 0, .2, 1) var(--d),
+      filter 1.1s cubic-bezier(.22, 1, .36, 1) var(--d),
+      transform 1.1s cubic-bezier(.22, 1, .36, 1) var(--d);
+  }
+  .flow #feat-phone { --d: .7s; }
+  .flow #feat-email { --d: .9s; }
+  .flow #feat-pain { --d: 1.1s; }
+  .flow #feat-bios { --d: 1.3s; }
+  .flow #feat-ai { --d: 1.5s; }
+
+  /* Skeleton bars grow from the left as the card appears */
+  .flow__frame.anim .bar { transform: scaleX(0); transform-origin: 0 50%; }
+  .flow__frame.anim.play .bar {
+    transform: none;
+    transition: transform .9s cubic-bezier(.22, 1, .36, 1) var(--d, .3s);
+  }
+
+  
+/* ---------- Клиенты: «Over 300,000 businesses…» + бегущая строка логотипов ---------- */
+.clients { padding: 80px 0 0; background: var(--grey-zircon); }
+.clients__card {
+  position: relative;
+  width: 1180px;
+  max-width: calc(100% - 32px);
+  height: 284px;
+  margin: 0 auto;
+  padding-top: 48px;
+  border-radius: 28px;
+  background: var(--grey-zircon);
+  overflow: hidden;
+}
+.clients__title {
+  width: 626px;
+  max-width: 100%;
+  margin: 0 auto;
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: -1.28px;
+  text-align: center;
+}
+.clients__accent { color: #7357eb; }
+
+/* бегущая строка: два одинаковых списка подряд, сдвигаем на ширину одного — шов не виден */
+.logos { position: absolute; left: 0; right: 0; top: 180px; height: 56px; overflow: hidden; }
+.logos::before, .logos::after { /* затухание по краям, 200px */
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 200px;
+  pointer-events: none;
+}
+.logos::before { left: 0; background: linear-gradient(90deg, var(--grey-zircon), rgba(241, 244, 249, 0)); }
+.logos::after { right: 0; background: linear-gradient(270deg, var(--grey-zircon), rgba(241, 244, 249, 0)); }
+.logos__track { display: flex; width: max-content; animation: logos-scroll 40s linear infinite; }
+.logos:hover .logos__track { animation-play-state: paused; }
+.logos__list { display: flex; list-style: none; }
+.logos__item { display: grid; place-items: center; width: 184px; height: 56px; }
+.logos__item img { display: block; max-width: 100%; height: 56px; }
+@keyframes logos-scroll { to { transform: translateX(-50%); } }
+@media (prefers-reduced-motion: reduce) {
+  .logos__track { animation: none; }
+}
+
+/* ---------- CTA «Want to hear what we can do for you?» ---------- */
+.demo-cta-wrap { padding: 80px 0 100px; background: var(--grey-zircon); }
+.stories, .faq { background: var(--grey-zircon); }
+.demo-cta {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 992px;
+  max-width: calc(100% - 32px);
+  height: 184px;
+  margin: 0 auto;
+  padding: 0 49px 0 202px; /* видео 11+160, текст с x=203 (минус бордер) */
+  border: 1px dashed #bed5f4;
+  border-radius: 28px;
+  background: #e8eef7;
+}
+.demo-cta__media { position: absolute; left: 10px; top: 10px; width: 160px; height: 160px; overflow: hidden; border-radius: 16px; background: var(--white); }
+.demo-cta__media img { width: 100%; height: 100%; object-fit: cover; }
+.demo-cta__body { display: flex; align-items: center; justify-content: space-between; flex: 1; gap: 24px; }
+.demo-cta__text { display: flex; flex-direction: column; gap: 12px; width: 501px; }
+.demo-cta__title { font-size: 24px; font-weight: 700; line-height: 29px; letter-spacing: -0.96px; }
+.demo-cta__sub { font-size: 16px; line-height: 1.5; letter-spacing: -0.16px; }
+.demo-cta__btn { padding: 9px 18px; flex-shrink: 0; }
+
+/* ---------- Footer CTA «Need help picking the best plan?» ---------- */
+.plans-footer { height: 350px; background: linear-gradient(90deg, #172234, #0d1118); color: var(--white); }
+.plans-footer__inner { position: relative; width: 1536px; max-width: 100%; height: 100%; margin: 0 auto; }
+.plans-footer__img { position: absolute; left: 340px; top: 66px; width: 296px; height: 173px; }
+.plans-footer__body { position: absolute; left: 765px; top: 45px; }
+.plans-footer__title { width: 513px; font-size: 48px; font-weight: 700; line-height: 1.3; }
+.plans-footer__sub { width: 472px; margin-top: 9px; font-size: 20px; line-height: 1.5; }
+.plans-footer__btn { margin-top: 20px; padding: 5px 14px 5px 18px; }
+/* кнопки «Book a demo» — сплошной фиолетовый, не градиент как у Enrich tools */
+.demo-cta__btn, .plans-footer__btn { background: var(--purple); }
+.demo-cta__btn:hover, .plans-footer__btn:hover { background: var(--purple-medium); }
+
+/* ---------- общий заголовок секций ---------- */
+.section-title { font-size: 32px; font-weight: 700; line-height: 38px; letter-spacing: -1.28px; text-align: center; }
+
+/* ---------- Отзывы: слайдер ---------- */
+.stories { padding-bottom: 80px; overflow: hidden; }
+.stories__viewport { margin-top: 56px; }
+.stories__track { display: flex; gap: 20px; transition: transform .6s var(--ease); will-change: transform; }
+.stories__track.no-anim { transition: none; }
+.stories__track { cursor: grab; touch-action: pan-y; user-select: none; }
+.stories__track.is-dragging { cursor: grabbing; }
+
+.story {
+  --bg: #ecf4fd; --line: #bed9f8; --ink: #1f3247; --sub: #8598ad;
+  display: flex;
+  align-items: center;
+  gap: 48px;
+  flex-shrink: 0;
+  width: 720px;
+  height: 401px;
+  padding: 48px;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  background: var(--bg);
+  color: var(--ink);
+}
+.story--pink  { --bg: #fdecfc; --line: #f8bef3; --ink: #471f44; --sub: #ad85aa; }
+.story--peach { --bg: #fdf4ec; --line: #f8d9be; --ink: #47321f; --sub: #ad9885; }
+.story--teal  { --bg: #ecfdfc; --line: #bef8f3; --ink: #1f4744; --sub: #85adaa; }
+.story__person { display: flex; flex-direction: column; gap: 32px; width: 320px; flex-shrink: 0; align-self: flex-start; }
+.story__who { display: flex; align-items: center; gap: 20px; }
+.story__photo { position: relative; width: 104px; height: 136px; flex-shrink: 0; }
+/* в фото уже вшиты белая рамка 3px и тень: картинка 110×142 (@2x), выходит на 3px за карточку фото */
+.story__photo img { position: absolute; left: -3px; top: -3px; width: 110px; height: 142px; }
+.story__photo--frame { overflow: hidden; border: 3px solid var(--white); border-radius: 20px; background: #d1d1d1; box-shadow: 0 2px 3px rgba(0, 0, 0, .15); }
+.story__photo--frame img { position: static; width: 100%; height: 100%; object-fit: cover; } /* фото без вшитой рамки — рамка и тень на CSS */
+.story__photo img.is-missing, .story__logo img.is-missing { visibility: hidden; } /* пока нет фото/логотипа */
+.story__id { display: flex; flex-direction: column; min-width: 0; }
+.story__logo { height: 32px; margin-bottom: 12px; }
+.story__logo img { width: 136px; height: 32px; } /* svg-рамка 136×32 из Figma, логотип уже выровнен внутри */
+.story__name { font-size: 20px; font-weight: 700; line-height: 1.5; }
+.story__role { margin-top: 3px; color: var(--sub); font-size: 13px; line-height: 20px; text-wrap: balance; }
+.story__quote { font-size: 18px; line-height: 1.5; letter-spacing: -0.18px; }
+.story__data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  flex: 1;
+  align-self: stretch;
+  padding-left: 48px;
+  border-left: 1px solid var(--line); /* разделитель: 48px от текста слева и справа */
+}
+.story__stat { font-size: 56px; font-weight: 700; line-height: 1; letter-spacing: -3.36px; }
+.story__label { margin-top: 16px; font-size: 16px; line-height: 1.5; letter-spacing: -0.16px; text-wrap: balance; }
+.story__btn { margin-top: 24px; padding: 5px 14px 5px 18px; color: var(--grey-main); }
+
+/* точки слайдера: активная — полоска 40px с прогрессом автопрокрутки */
+.slider-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  width: max-content;
+  margin: 32px auto 0;
+  padding: 6px;
+  border-radius: 24px;
+  background: #dcdce5;
+}
+.slider-dots__dot { position: relative; width: 8px; height: 8px; overflow: hidden; border-radius: 24px; background: var(--white); transition: width .3s var(--ease), background .3s; }
+.slider-dots__dot.is-active { width: 40px; background: #bcbcc8; }
+.slider-dots__dot.is-active::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 8px;
+  border-radius: 24px;
+  background: #7357eb;
+  animation: dot-progress var(--autoplay, 6s) linear forwards;
+}
+.stories.is-paused .slider-dots__dot.is-active::after { animation-play-state: paused; }
+/* растёт ширина, а не scaleX — так скругления не сплющиваются; старт с кружка 8px */
+@keyframes dot-progress { from { width: 8px; } to { width: 100%; } }
+
+/* ---------- FAQ ---------- */
+.faq { padding-bottom: 80px; }
+.faq__list { display: flex; flex-direction: column; width: 842px; max-width: calc(100% - 32px); margin: 56px auto 0; }
+.faq__item { border-radius: 28px; transition: background .2s; }
+.faq__item.is-open { background: var(--white); }
+.faq__q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  width: 100%;
+  padding: 24px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1.5;
+  letter-spacing: -0.36px;
+  text-align: left;
+  color: var(--grey-main);
+}
+.faq__arrow { flex-shrink: 0; transition: transform var(--dur) var(--ease); }
+.faq__item.is-open .faq__arrow { transform: rotate(180deg); }
+.faq__a { display: grid; grid-template-rows: 0fr; transition: grid-template-rows var(--dur) var(--ease); }
+.faq__item.is-open .faq__a { grid-template-rows: 1fr; }
+.faq__body {
+  overflow: hidden;
+  padding: 0 64px 0 24px;
+  color: var(--grey-main);
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: -0.32px;
+}
+.faq__item.is-open .faq__body { padding-bottom: 24px; margin-top: -8px; } /* 16px от вопроса */
+.faq__body > * + * { margin-top: 12px; }
+.faq__body ul { padding-left: 24px; }
+.faq__body li + li { margin-top: 4px; }
+.faq__body b { font-weight: 600; }
+.faq__body .link { color: var(--purple); }
+
+/* =====================================================================
+   Блок «Start with a name and company»
+   Координаты внутри кадра 1536 из Figma (node 10458:62355), начало — низ карточек формы.
+   ===================================================================== */
+.flow2 { position: relative; height: 638px; } /* начало — низ карточек (тень картинки-заглушки 12px); +80 до клиентов */
+.flow2__frame { position: absolute; left: 50%; top: 0; width: 1536px; height: 638px; margin-left: -768px; }
+.flow2__frame > * { position: absolute; }
+
+.f2-title { left: 0; right: 0; top: 80px; font-size: 28px; font-weight: 600; line-height: 36px; text-align: center; }
+.f2-sub { left: 483px; top: 132px; width: 570px; color: var(--grey-dove); font-size: 13px; line-height: 1.5; text-align: center; }
+.f2-sub b { font-weight: 700; }
+
+/* карточки: белые, скругление 32, мягкая тень */
+.f2-start, .f2-result__card, .f2-result__back {
+  border-radius: 32px;
+  background: var(--white);
+  box-shadow: 0 12px 24px rgba(25, 36, 53, .08), 0 0 0 1px rgba(25, 36, 53, .04);
+}
+
+/* 01 — с чего начинаем */
+.f2-start { left: 314px; top: 212px; width: 294px; height: 426px; }
+.f2-dot { position: absolute; border-radius: 2px; }
+.f2-start__bolt { position: absolute; left: 115px; top: 31px; width: 64px; height: 64px; } /* плашка 44px (картинка с тенью 78→64) */
+.f2-start__caption { position: absolute; left: 0; right: 0; top: 90px; color: #78695c; font-size: 12px; font-weight: 500; line-height: 1.5; text-align: center; }
+.f2-input { position: absolute; left: 20px; width: 254px; height: 58px; border-radius: 29px; border: 1px dashed #e3dfda; background: var(--white); }
+.f2-input.is-filled { border-color: transparent; background: #fff8e9; }
+.f2-input__ico { position: absolute; left: 11px; top: 11px; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: #f4f4f4; }
+.f2-input.is-filled .f2-input__ico { background: var(--white); }
+.f2-input__label { position: absolute; left: 57px; top: 10px; color: #878c94; font-size: 11px; font-weight: 500; line-height: 1.5; }
+.f2-input__value { position: absolute; left: 57px; top: 25px; color: #c4c2c0; font-size: 13px; font-weight: 600; line-height: 1.5; white-space: nowrap; }
+.f2-input.is-filled .f2-input__value { color: #736f6c; }
+.f2-input__arrow { position: absolute; left: 212px; top: 16px; }
+
+/* стрелка между карточками */
+.f2-arrow { left: 628px; top: 403px; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: #e6e9ee; }
+.f2-arrow .i { transform: rotate(180deg); }
+
+/* 02 — что получаем: карточка + повёрнутая подложка за ней */
+.f2-result { left: 692px; top: 212px; width: 530px; height: 426px; }
+.f2-result__back { position: absolute; inset: 0; transform: rotate(3.2deg); } /* копия фона передней карточки; Figma −3.2° = CSS 3.2° (по часовой) */
+.f2-result__card { position: absolute; inset: 0; }
+.f2-result__card > * { position: absolute; }
+.f2-avatar { left: 40px; top: 40px; width: 60px; height: 60px; border-radius: 50%; object-fit: cover; }
+.f2-name { left: 112px; top: 46px; color: #333231; font-size: 16px; font-weight: 600; line-height: 1.5; }
+.f2-meta {
+  left: 107px;
+  top: 70px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  height: 25px;
+  padding: 0 5px;
+  border-radius: 6px;
+  background: #fff8e9;
+  color: #333231;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+.f2-meta i { width: 4px; height: 4px; border-radius: 50%; background: #333231; }
+.f2-row {
+  left: 40px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 450px;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border-radius: 8px;
+  background: #fffaf1;
+  font-size: 13px;
+  line-height: 20px;
+}
+.f2-row__label { width: 99px; flex-shrink: 0; color: #736f6c; }
+.f2-row__value { display: flex; align-items: center; gap: 4px; min-width: 0; overflow: hidden; color: #333231; white-space: nowrap; }
+.f2-row__value { text-overflow: ellipsis; display: block; }
+.f2-row__value img { display: inline-block; vertical-align: -3px; margin-left: 4px; }
+.f2-valid { display: inline-block; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--status-valid); vertical-align: 0; }
+.f2-ai { left: 40px; width: 450px; height: 77px; padding: 8px 12px; border-radius: 8px; background: #fffaf1; overflow: hidden; }
+.f2-ai::after { /* текст исследования растворяется книзу */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0) 40%, var(--white) 100%);
+  pointer-events: none;
+}
+.f2-ai__title { display: flex; align-items: center; gap: 4px; color: #333231; font-size: 13px; font-weight: 500; line-height: 1.5; }
+.f2-ai__text { margin-top: 4px; color: #73787b; font-size: 12px; font-weight: 500; line-height: 1.5; }
+.f2-more { left: 56px; top: 373px; display: flex; align-items: center; gap: 2px; color: #333231; font-size: 13px; line-height: 20px; white-space: nowrap; }
+
+/* ---------- анимация появления блока «Start with a name and company» ----------
+   карточки плавно «приезжают» из размытия с лёгким зумом; задняя карточка справа
+   в начале почти совпадает с передней и разворачивается до своих 3° */
+.flow2.is-anim .f2-start,
+.flow2.is-anim .f2-result__card { opacity: 0; filter: blur(14px); transform: scale(.92); }
+.flow2.is-anim .f2-arrow { opacity: 0; transform: scale(.8); }
+.flow2.is-anim .f2-result__back { opacity: 0; filter: blur(14px); transform: rotate(0deg) scale(.92); } /* старт: ровно под передней карточкой → поворот до Figma −3.2° */
+
+.flow2.is-play .f2-start,
+.flow2.is-play .f2-result__card {
+  opacity: 1;
+  filter: none;
+  transform: none;
+  transition:
+    opacity 1s cubic-bezier(.33, 0, .2, 1),
+    filter 1.4s cubic-bezier(.22, 1, .36, 1),
+    transform 1.4s cubic-bezier(.22, 1, .36, 1);
+}
+.flow2.is-play .f2-arrow {
+  opacity: 1;
+  transform: none;
+  transition: opacity 1s cubic-bezier(.33, 0, .2, 1), transform 1.4s cubic-bezier(.22, 1, .36, 1);
+}
+.flow2.is-play .f2-result__back {
+  opacity: 1;
+  filter: none;
+  transform: rotate(3.2deg);
+  transition:
+    opacity 1s cubic-bezier(.33, 0, .2, 1),
+    filter 1.4s cubic-bezier(.22, 1, .36, 1),
+    transform 1.6s cubic-bezier(.22, 1, .36, 1); /* все стартуют вместе; поворот чуть дольше */
+}

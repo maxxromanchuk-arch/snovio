@@ -1,0 +1,238 @@
+/* =========================================================
+   prospects.css — страница Leads / Prospects
+   ========================================================= */
+
+.workspace { flex: 1; min-height: 0; display: flex; gap: 20px; margin-top: var(--gap); }
+.promo[hidden] + .workspace { margin-top: 0; } /* без баннера 1 — отступ от навигации 8px */
+/* панель Lists: скрытие/показ кнопкой у заголовка — панель уезжает влево, контент подтягивается */
+.workspace.is-lists-hidden .lists { margin-left: -320px; opacity: 0; visibility: hidden; } /* 300 + gap 20 */
+.workspace.is-lists-hidden .content { padding-left: 12px; } /* отступ от левой навигации 20px */
+.workspace.is-animated .lists {
+  transition: margin-left var(--dur) var(--ease), opacity var(--dur) var(--ease), visibility 0s linear var(--dur);
+}
+.workspace.is-animated:not(.is-lists-hidden) .lists { transition-delay: 0s; }
+.workspace.is-animated .content { transition: padding-left var(--dur) var(--ease); }
+@media (prefers-reduced-motion: reduce) {
+  .workspace.is-animated .lists, .workspace.is-animated .content { transition: none; }
+}
+
+/* =================== Lists panel =================== */
+.lists {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  flex-shrink: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 1px 2px rgba(31, 40, 44, .08);
+}
+
+/* tab header — форма таба из Figma (bg_tab + бордеры) */
+.lists__head { position: relative; flex-shrink: 0; height: 39px; }
+.lists__tab { position: absolute; left: -1px; top: -1px; pointer-events: none; }
+.lists__title { position: absolute; left: 19px; top: 12px; font-size: 13px; font-weight: 600; }
+.lists__actions { position: absolute; right: 15px; top: 3px; display: flex; gap: 2px; }
+.lists__action { width: 32px; height: 32px; border-radius: var(--radius); background: var(--white); }
+
+.lists__body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 7px 7px 0;
+}
+.lists__body::-webkit-scrollbar { width: 6px; }
+.lists__body::-webkit-scrollbar-thumb { border-radius: 3px; background: var(--grey-ghost); }
+@supports not selector(::-webkit-scrollbar) {
+  .lists__body { scrollbar-width: thin; scrollbar-color: var(--grey-ghost) transparent; }
+}
+.lists__foot { position: relative; flex-shrink: 0; margin: 0 7px 6px; padding-top: 9px; }
+.lists__foot::before { content: ""; position: absolute; inset: 0 4px auto; height: 1px; background: var(--line); }
+
+/* row */
+.lrow {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 40px;
+  margin-bottom: 1px;
+  padding: 0 12px 0 14px;
+  border-radius: var(--radius);
+  cursor: pointer;
+}
+.lrow:hover { background: var(--grey-zircon); }
+.lrow.is-active { background: var(--grey-zircon); font-weight: 500; }
+.lrow__name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lrow__count { margin-left: auto; color: var(--grey-dove); }
+.lrow.is-active .lrow__count { color: var(--grey-main); }
+
+.lrow--folder { gap: 0; padding-left: 12px; }
+.lrow--folder .lrow__name { margin-left: 4px; }
+.lrow--system { padding-left: 12px; }
+.lrow--system .lrow__name { flex: 0 1 auto; }
+
+/* drag handle + more: показываются на hover */
+.lrow__drag { position: absolute; left: 4px; top: 14px; width: 6px; height: 12px; cursor: grab; }
+.lrow__more { position: absolute; right: 3px; top: 3px; width: 34px; height: 34px; border-radius: var(--radius); }
+.lrow__drag, .lrow__more { display: none; }
+.lrow:hover .lrow__drag { display: block; }
+.lrow:hover .lrow__more { display: flex; }
+.lrow:hover .lrow__count:has(+ .lrow__more) { visibility: hidden; }
+
+/* =================== Content =================== */
+.content { flex: 1; min-width: 0; display: flex; flex-direction: column; margin-right: calc(var(--gap) * -1); padding-top: var(--gap); }
+
+.page-head { display: flex; flex-direction: column; gap: 12px; margin-right: 20px; }
+.page-head__title { display: flex; align-items: center; gap: 8px; height: 24px; }
+.page-head__title h1 { font-size: 20px; font-weight: 400; white-space: nowrap; }
+.toolbar { display: flex; align-items: center; gap: 8px; }
+.toolbar__more { position: relative; }
+.toolbar__filter { margin-left: auto; }
+
+.content .promo { margin: var(--gap) 20px 0 0; }
+
+/* =================== Table =================== */
+.table { position: relative; flex: 1; min-height: 0; margin-top: var(--gap); }
+.table__scroll { position: absolute; inset: 0; overflow: auto; }
+
+/* scrollbars: WebKit/Blink — кастомные; Firefox — thin.
+   scrollbar-width не задаём для Chrome: при нём ::-webkit-scrollbar игнорируется */
+.table__scroll::-webkit-scrollbar { width: 0; height: 10px; } /* вертикальный — кастомный оверлей (js), строки идут до края */
+.table__scroll::-webkit-scrollbar-track { background: transparent; }
+.table__scroll::-webkit-scrollbar-thumb { border: 2px solid var(--white); border-radius: 5px; background: var(--grey-ghost); }
+.table__scroll::-webkit-scrollbar-corner { background: transparent; }
+@supports not selector(::-webkit-scrollbar) {
+  .table__scroll { scrollbar-width: thin; scrollbar-color: var(--grey-ghost) transparent; }
+}
+.table__settings {
+  position: absolute;
+  right: 0;
+  top: 1px;
+  z-index: 2; /* над sticky-шапкой таблицы */
+  width: 38px;
+  height: 36px;
+  background: var(--white);
+}
+
+/* ширина = сумма колонок, но не уже контейнера: последняя колонка (Added) добирает остаток, справа нет пустоты */
+.grid { width: max(100%, 2250px); table-layout: fixed; border-collapse: separate; border-spacing: 0; background: var(--white); }
+.grid th, .grid td {
+  padding: 0 8px;
+  border-bottom: 1px solid var(--line);
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.grid th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 40px;
+  border-top: 1px solid var(--line);
+  background: var(--white);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-overflow: ellipsis;
+}
+.grid td { height: 62px; padding-bottom: 1px; } /* 62 = 61 + бордер; контент центрируется в чётных 60px — иконки на целых пикселях */
+.grid tbody tr:hover td { background: var(--grey-desert); }
+
+.col-check { width: 44px; }
+.grid .col-check { padding: 0 0 0 4px; }
+.col-prospect { width: 240px; }
+.grid .col-prospect { padding-right: 16px; }
+.col-emails { width: 276px; }
+.col-phone, .col-linkedin, .col-tags, .col-company, .col-company-industry, .col-industry { width: 220px; }
+.col-country { width: 220px; }
+.col-added { min-width: 150px; } /* без фиксированной ширины — забирает остаток */
+.checkbox { display: block; }
+
+.select-all { display: flex; align-items: center; gap: 5px; }
+
+/* cells */
+.prospect__line { display: flex; align-items: center; height: 15px; }
+.prospect__name { display: block; color: var(--purple); }
+.prospect__meta { display: flex; align-items: center; gap: 4px; margin-top: 6px; color: var(--grey-dove); }
+.prospect__meta > :last-child { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.sep { width: 4px; height: 4px; flex-shrink: 0; border-radius: 50%; background: var(--grey-ghost); }
+
+.email { display: flex; align-items: center; }
+.email + .email { margin-top: 6px; }
+.email::before { content: ""; flex-shrink: 0; width: 8px; height: 8px; margin-right: 6px; border-radius: 50%; background: var(--status-valid); } /* статус → email: 6px */
+.email__provider { display: flex; margin-left: 4px; }                    /* email → провайдер: 4px */
+/* действия в ячейке (копировать / редактировать) — показываются на hover строки значения */
+.cell-actions { display: none; gap: 8px; margin-left: 8px; }
+.email:hover .cell-actions, .phone:hover .cell-actions, .prospect__line:hover .cell-actions, .social-cell:hover .cell-actions { display: flex; }
+
+.social-cell { display: flex; align-items: center; }
+
+.phone { display: flex; align-items: center; }
+.muted { color: var(--grey-aluminium); }
+
+/* маленькие кнопки действий в ячейках таблицы (Button / table_action, small) */
+.btn-sm {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 24px;
+  padding: 0 5px; /* 6px с учётом бордера */
+  border: 1px solid var(--grey-ghost);
+  border-radius: 6px;
+  background: var(--white);
+  color: var(--grey-main);
+  white-space: nowrap;
+}
+.btn-sm:hover { border-color: var(--grey-silver); background: var(--grey-desert); }
+
+/* «Get number» — запуск обогащения вместо Not found */
+.btn-sm--get { padding: 0 8px 0 3px; box-shadow: 0 1px 2px 0 rgba(31, 40, 44, .1); font-size: 12px; }
+
+/* «Add tags» — в пустой ячейке тегов, только на hover строки */
+.btn-sm--add-tags { visibility: hidden; filter: drop-shadow(0 1px 1px rgba(31, 40, 44, .06)); font-size: 13px; }
+.grid tbody tr:hover .btn-sm--add-tags, .btn-sm--add-tags:focus-visible { visibility: visible; }
+.btn-sm--icon { justify-content: center; width: 24px; padding: 0; } /* только иконка — рядом с существующими тегами */
+
+.social { display: inline-flex; align-items: center; gap: 4px; color: var(--purple); }
+.tags { display: flex; gap: 4px; }
+.tag .i--16 { cursor: pointer; }
+
+/* =================== Pagination =================== */
+.table-foot { flex-shrink: 0; margin-top: var(--gap); }
+
+.pager { display: flex; gap: 8px; }
+.pager__pages { display: flex; align-items: center; gap: 2px; list-style: none; }
+.pager__page { display: grid; place-items: center; width: 34px; height: 34px; border-radius: var(--radius); line-height: 1.5; }
+.pager__page:hover { background: var(--grey-desert); }
+.pager__page.is-active { background: var(--grey-athens); }
+.pager__gap { width: 16px; text-align: center; line-height: 1.5; }
+.table__settings-icon { height: 23px; }
+
+/* кастомный вертикальный скроллбар поверх таблицы */
+.vbar { position: absolute; right: 0; top: 40px; bottom: 0; width: 10px; z-index: 2; background: var(--white); } /* подложка 10px, ползунок 6px, отступ 2px с каждой стороны */
+.vbar[hidden] { display: none; }
+.vbar__thumb { position: absolute; left: 2px; width: 6px; border-radius: 3px; background: var(--grey-ghost); pointer-events: auto; cursor: pointer; }
+.vbar__thumb:hover, .vbar.is-dragging .vbar__thumb { background: var(--grey-silver); }
+
+/* =================== Enrich & AI tools =================== */
+.tool-list { display: flex; flex-direction: column; gap: 1px; list-style: none; }
+.tool-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  border-radius: var(--radius);
+  text-align: left;
+}
+.tool-item:hover { border-radius: 12px; background: var(--grey-desert); }
+.tool-item__icon { display: grid; place-items: center; width: 40px; height: 40px; flex-shrink: 0; border-radius: var(--radius); background: var(--grey-desert); }
+.tool-item:hover .tool-item__icon { background: var(--white); }
+.tool-item__text { display: flex; flex-direction: column; gap: 4px; padding-top: 3px; }
+.tool-item__title { font-weight: 500; }
+.tool-item__desc { color: var(--grey-dove); }
+.tutorial-link { display: inline-flex; align-items: center; gap: 4px; margin: 16px 0 0 11px; color: var(--purple); }
+.tutorial-link .i { color: var(--purple); }
