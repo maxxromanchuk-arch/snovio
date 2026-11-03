@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pricing plans — Snov.io</title>
+<link rel="icon" type="image/svg+xml" href="icons/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/fonts.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/plans.css">
+</head>
+<body class="no-leftnav">
+
+<!-- icon sprite -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-notification" viewBox="0 0 24 24"><path d="M10.5018 4.5C10.5018 3.67157 11.1734 3 12.0018 3C12.8302 3 13.5018 3.67157 13.5018 4.5C13.5018 4.56302 13.4979 4.62512 13.4904 4.6861C16.084 5.34818 17.5018 7.70013 17.5018 10.5V15H18.0003C19.3076 15 19.3069 17 17.9997 17H15.0011C15.0011 18.6569 13.6569 20 12 20C10.3431 20 9.00112 18.6569 9.00112 17H5.99986C4.70602 17 4.70956 15 6.0034 15H6.5018V10.5C6.5018 7.70013 7.91959 5.34818 10.5132 4.6861C10.5057 4.62512 10.5018 4.56302 10.5018 4.5ZM12.0018 6.5C9.51652 6.5 8.5018 8.01472 8.5018 10.5V15H9.40314H12.0018H14.6004H15.5018V10.5C15.5018 8.01472 14.4871 6.5 12.0018 6.5ZM12 18C12.5 18 13.0011 17.8284 13.0011 17H11.0011C11.0011 17.8284 11.5 18 12 18Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/></symbol>
+  <symbol id="i-arrow-small-right" viewBox="0 0 24 24"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYTpjOGMwYmM4ZC1kZDkxLTRlZjEtYjg3NS1iYTA5MWQwYmZlODgAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaGyLSk9L+QAm1KV9spzzEWgAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDpmOGU5M2I2Ni1iNzkzLTRlNzYtOWQzZS04YmU5YjYxMGQzOWJscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNowZcG26NNoNkfmDPJdRiUXQAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggS4yWmsunCituSeSZXL8U/t0APoXpHGOJaCb2Oyx+TVKkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaHYslc2E9R7yTnmXdXjZx34AAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCAS9F7MDp9HDfWY9ObIXUKxoS8RydjWxRQFhNOPDGyf1GRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBieZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOmM4YzBiYzhkLWRkOTEtNGVmMS1iODc1LWJhMDkxZDBiZmU4OC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmVkY2ZmOWEyLTE5NzgtNGY2Ni1iOGM4LWM4YTAxM2NjMDA5YXJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBLjJaay6cKK25J5JlcvxT+3QA+hekcY4loJvY7LH5NUqJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggbkCSkSvTR5CZJ2ZcT/TXTtT4+ERxreF5a5Uz0102A6miY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggESo25vMAs3RB7nOqiZXsiSurFAEHCapLcNBsTFV+0oV0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQKHEPeCCigjiV7qsGgEwwmccN8Qo1XSDslilMcBsdr1Mw4ED3GzUOjNWGzy5llxV7AOjflYEPtN72kfdWzkS65U=</c2pa:manifest></metadata><path d="M9.54289 16.2071C9.15237 15.8166 9.15237 15.1834 9.54289 14.7929L12.3358 12L9.54289 9.20711C9.15237 8.81658 9.15237 8.18342 9.54289 7.79289C9.93342 7.40237 10.5666 7.40237 10.9571 7.79289L14.4571 11.2929C14.8476 11.6834 14.8476 12.3166 14.4571 12.7071L10.9571 16.2071C10.5666 16.5976 9.93342 16.5976 9.54289 16.2071Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/></symbol>
+  <symbol id="i-arrow-small-bottom" viewBox="0 0 24 24"><metadata><c2pa:manifest>AAAWgmp1bWIAAAAeanVtZGMycGEAEQAQgAAAqgA4m3EDYzJwYQAAABZcanVtYgAAAEdqdW1kYzJtYQARABCAAACqADibcQN1cm46YzJwYToxODIzZjk4YS03YzFhLTQ3MWEtYWI1Yi05MDRhZDQxNThhNmQAAAADl2p1bWIAAAApanVtZGMyYXMAEQAQgAAAqgA4m3EDYzJwYS5hc3NlcnRpb25zAAAAALxqdW1iAAAARGp1bWRjYm9yABEAEIAAAKoAOJtxE2MycGEuaW5ncmVkaWVudC52MwAAAAAYYzJzaKOSBY0oK9VlGdSw89LWM7gAAABwY2JvcqNpZGM6Zm9ybWF0bWltYWdlL3N2Zyt4bWxqaW5zdGFuY2VJRHgseG1wOmlpZDphMjI5NjA1OS1mYTQyLTQ3NWUtODc2Ny0yMTEwNzQzYzA2MjRscmVsYXRpb25zaGlwaHBhcmVudE9mAAAB4mp1bWIAAABBanVtZGNib3IAEQAQgAAAqgA4m3ETYzJwYS5hY3Rpb25zLnYyAAAAABhjMnNoQomU6n5GwDAHxkEYUcV1LAAAAZljYm9yomdhY3Rpb25zgqJmYWN0aW9ua2MycGEub3BlbmVkanBhcmFtZXRlcnOha2luZ3JlZGllbnRzgaJjdXJseC1zZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmluZ3JlZGllbnQudjNkaGFzaFggS0BvHYttu27ZYHc3PyYU79HIqUg/wmt+pBLwgAA5ecGkZmFjdGlvbngdY29tLmFudGhyb3BpYy5jbGF1ZGUucHJvdmlkZWRqcGFyYW1ldGVyc6F4H2NvbS5hbnRocm9waWMub3JpZ2luLWNvbmZpZGVuY2VndW5rbm93bmtkZXNjcmlwdGlvbnhmQ2xhdWRlIHByb3ZpZGVkIHRoaXMgZmlsZSBhdCB0aGUgcmVxdWVzdCBvZiBhIHVzZXIgYW5kIG1heSBoYXZlIGNyZWF0ZWQgb3IgbW9kaWZpZWQgdGhlIGZpbGUgY29udGVudHMubXNvZnR3YXJlQWdlbnShZG5hbWVmQ2xhdWRlcmFsbEFjdGlvbnNJbmNsdWRlZPUAAADIanVtYgAAAEBqdW1kY2JvcgARABCAAACqADibcRNjMnBhLmhhc2guZGF0YQAAAAAYYzJzaK9hoif7ecnvgnx+PQb/s4MAAACAY2JvcqVjYWxnZnNoYTI1NmNwYWRNAAAAAAAAAAAAAAAAAGRoYXNoWCB8RWOHNspVnOhH5JznPMDRM06TJX9d6bvI5gJTQgkU8GRuYW1lbmp1bWJmIG1hbmlmZXN0amV4Y2x1c2lvbnOBomVzdGFydBieZmxlbmd0aBkeBAAAAj5qdW1iAAAAJ2p1bWRjMmNsABEAEIAAAKoAOJtxA2MycGEuY2xhaW0udjIAAAACD2Nib3KlY2FsZ2ZzaGEyNTZpc2lnbmF0dXJleE1zZWxmI2p1bWJmPS9jMnBhL3VybjpjMnBhOjE4MjNmOThhLTdjMWEtNDcxYS1hYjViLTkwNGFkNDE1OGE2ZC9jMnBhLnNpZ25hdHVyZWppbnN0YW5jZUlEeCx4bXA6aWlkOmE4ZjdjZTY2LTQ4NjQtNDgyNS1hNTQ0LWJkMzNkMzcxODQ1OHJjcmVhdGVkX2Fzc2VydGlvbnODomN1cmx4LXNlbGYjanVtYmY9YzJwYS5hc3NlcnRpb25zL2MycGEuaW5ncmVkaWVudC52M2RoYXNoWCBLQG8di227btlgdzc/JhTv0cipSD/Ca36kEvCAADl5waJjdXJseCpzZWxmI2p1bWJmPWMycGEuYXNzZXJ0aW9ucy9jMnBhLmFjdGlvbnMudjJkaGFzaFggv/8lzea9SJeRpYK+/1BLGeKZxzOrDuhaSTVAqgfaWJeiY3VybHgpc2VsZiNqdW1iZj1jMnBhLmFzc2VydGlvbnMvYzJwYS5oYXNoLmRhdGFkaGFzaFggqqZ2j66FSpzUo6cSINFDDaeMmRPaXY+NS0VgQ3skK/h0Y2xhaW1fZ2VuZXJhdG9yX2luZm+jZG5hbWVvQW50aHJvcGljIEZpbGVzZ3ZlcnNpb25lMS4wLjBrc3BlY1ZlcnNpb25lMi40LjAAABA4anVtYgAAAChqdW1kYzJjcwARABCAAACqADibcQNjMnBhLnNpZ25hdHVyZQAAABAIY2JvctKEWQISogEmGCFZAgowggIGMIIBjaADAgECAhRA5aAK7sI50L64g/oGQgU9Z1UTADAKBggqhkjOPQQDAzBJMRcwFQYDVQQKEw5BbnRocm9waWMsIFBCQzEuMCwGA1UEAxMlQW50aHJvcGljIENvbnRlbnQgQ3JlZGVudGlhbHMgUm9vdCBDQTAeFw0yNjA4MDcxODQzNTZaFw0yODA4MDYxOTQzNTZaMEQxFzAVBgNVBAoTDkFudGhyb3BpYywgUEJDMSkwJwYDVQQDEyBBbnRocm9waWMgQ2xhdWRlIENvbnRlbnQgU2lnbmluZzBZMBMGByqGSM49AgEGCCqGSM49AwEHA0IABJh6CmvLUBgFFNU0vUKlOVtE6djd17L5SuwX0LemFisBM3dkd/3cyjxFA3Qo5S46fX0/ihY0VZ7mfb9KF703t5OjWDBWMA4GA1UdDwEB/wQEAwIHgDAVBgNVHSUEDjAMBgorBgEEAYPoXgIBMAwGA1UdEwEB/wQCMAAwHwYDVR0jBBgwFoAUzlHiBIFOZFsj+OPEz5o+nMHXXMIwCgYIKoZIzj0EAwMDZwAwZAIwMXMdFJ4BetLLVY7ORuE9noqbbAZOZn/aArXyTwFAZfKrPzxF2vPoJNf1+UCdg1XGAjBwX1zd9WGqYkqmL5SFqw1QySjr1zJfpJM9+1rdDwSPLMOPOjKuiXjoU/pUUeG9RwmhY3BhZFkNngAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPZYQNuBDM/v9FjzxBXUnpPTkcSS7Zl4xHAcyFrl5NkjHyHDVCsdDJnTmvLHHSp5tbGUx7AuuyhV7WZnoI5uvF52oqs=</c2pa:manifest></metadata><path d="M7.32544 9.31952C7.75935 8.89349 8.46287 8.89349 8.89679 9.31952L12 12.3663L15.1032 9.31952C15.5371 8.89349 16.2406 8.89349 16.6746 9.31952C17.1085 9.74555 17.1085 10.4363 16.6746 10.8623L12.7857 14.6805C12.3518 15.1065 11.6482 15.1065 11.2143 14.6805L7.32544 10.8623C6.89152 10.4363 6.89152 9.74555 7.32544 9.31952Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><path d="M12 20C16.4183 20 20 16.4183 20 12C20 7.58172 16.4183 4 12 4C7.58172 4 4 7.58172 4 12C4 16.4183 7.58172 20 12 20ZM12 18.5C15.5899 18.5 18.5 15.5899 18.5 12C18.5 8.41015 15.5899 5.5 12 5.5C8.41015 5.5 5.5 8.41015 5.5 12C5.5 15.5899 8.41015 18.5 12 18.5Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M12 10.5C12.4142 10.5 12.75 10.8358 12.75 11.25V15.25C12.75 15.6642 12.4142 16 12 16C11.5858 16 11.25 15.6642 11.25 15.25V11.25C11.25 10.8358 11.5858 10.5 12 10.5Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M12 8C12.4142 8 12.75 8.33579 12.75 8.75C12.75 9.16421 12.4142 9.5 12 9.5C11.5858 9.5 11.25 9.16421 11.25 8.75C11.25 8.33579 11.5858 8 12 8Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/></symbol>
+  <symbol id="i-back" viewBox="0 0 24 24"><path d="M18 12H7M12 17L7 12L12 7" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" stroke="currentColor" fill="none"/></symbol>
+</svg>
+
+<!-- ============ Top navigation (вариант для Plans: без меню разделов, без левой навигации) ============ -->
+<header class="topnav topnav--plain">
+  <a class="topnav__brand" href="prospects.html" aria-label="Snov.io"><img src="icons/logo.svg" width="110" height="28" alt=""></a>
+  <a class="topnav__back icon-btn" href="prospects.html" data-back aria-label="Back"><svg class="i" aria-hidden="true"><use href="#i-back"/></svg></a>
+  <!-- скрыто: кнопка To checkout (стили в plans.css) -->
+  <!-- <a class="btn-checkout" href="#checkout"><span class="btn-checkout__count">5</span>To checkout</a> -->
+  <div class="account">
+    <button class="account__notif icon-btn" aria-label="Notifications"><svg class="i" aria-hidden="true"><use href="#i-notification"/></svg><span class="dot"></span></button>
+    <button class="account__avatar" aria-label="Account">MK</button>
+  </div>
+</header>
+
+<main class="plans">
+  <!-- ============ Hero: заголовок + переключатель продуктов ============ -->
+  <section class="plans-hero">
+    <div class="plans-hero__glow" aria-hidden="true"></div>
+    <h1 class="plans-hero__title">From missing fields to enriched leads<br><span class="plans-hero__accent">from $0.004 per field</span></h1>
+    <div class="product-tabs" role="tablist" aria-label="Products">
+      <button class="product-tab" role="tab" aria-selected="false"><img src="icons/sales-suite-16.svg" width="16" height="16" alt="">Sales Suite</button>
+      <button class="product-tab" role="tab" aria-selected="false"><img src="icons/linkedin-16.svg" width="16" height="16" alt="">LinkedIn Automation</button>
+      <button class="product-tab is-active" role="tab" aria-selected="true"><img src="icons/enrichment-token-16.svg" width="16" height="16" alt="">Phone and Data Enrichment</button>
+    </div>
+  </section>
+
+  <!-- ============ Форма: выбор пакета + Price breakdown (временно картинка-заглушка) ============ -->
+  <section class="plans-form">
+    <!-- выбор пакета токенов -->
+    <div class="buy-card">
+      <h2 class="buy-card__title">Phone and data enrichment</h2>
+      <p class="buy-card__sub">Collect phones, emails, lead and company data.</p>
+      <!-- содержимое хинта у «How many tokens do you need?» -->
+      <div class="tip-source" id="tokensTip" hidden>
+        <p>Each enrichment method costs a different number of tokens, depending on data provider and request complexity.</p>
+        <p><b>Email address:</b> 5 tokens<br><b>Phone number:</b> starting at 10 tokens<br><b>Email verification:</b> 0.5 token<br><b>LinkedIn and Company info:</b> starting at 0.2 per data point or 1 token for full profile.<br><b>AI-powered enrichments:</b> price varies based on the request complexity and the selected AI model.</p>
+      </div>
+      <div class="tokens" id="tokens" data-price="0.02">
+        <div class="tokens__head">
+          <p class="tokens__q">How many tokens do you need? <span class="icon-btn" tabindex="0" data-tip="How much each enrichment costs" data-tip-html="tokensTip" data-tip-theme="light" aria-describedby="tokensTip"><svg class="i" aria-hidden="true"><use href="#i-info"/></svg></span></p>
+          <p class="tokens__amount"><b id="tokensValue">10,000</b> tokens</p>
+        </div>
+        <div class="tokens__scale" role="slider" tabindex="0" aria-label="Tokens" aria-valuemin="0" aria-valuemax="50000" aria-valuenow="10000" id="tokensSlider">
+          <div class="tokens__track"><i class="tokens__seg"></i><i class="tokens__seg"></i><i class="tokens__seg"></i><i class="tokens__seg"></i><i class="tokens__seg"></i><i class="tokens__seg"></i></div>
+          <span class="tokens__thumb" aria-hidden="true"><i class="tokens__thumb-ring"></i><i class="tokens__thumb-knob"></i><img class="tokens__thumb-star" src="icons/slider-thumb-star.svg" width="16" height="16" alt=""></span>
+          <button class="tokens__step" type="button" data-step="0" style="--i:0" aria-label="0 tokens"><i class="tokens__tick"></i><span class="tokens__label">0</span></button><button class="tokens__step" type="button" data-step="1" style="--i:1" aria-label="1,000 tokens"><i class="tokens__tick"></i><span class="tokens__label">1K</span></button><button class="tokens__step" type="button" data-step="2" style="--i:2" aria-label="2,000 tokens"><i class="tokens__tick"></i><span class="tokens__label">2K</span></button><button class="tokens__step" type="button" data-step="3" style="--i:3" aria-label="5,000 tokens"><i class="tokens__tick"></i><span class="tokens__label">5K</span></button><button class="tokens__step" type="button" data-step="4" style="--i:4" aria-label="10,000 tokens"><i class="tokens__tick"></i><span class="tokens__label">10K</span></button><button class="tokens__step" type="button" data-step="5" style="--i:5" aria-label="20,000 tokens"><i class="tokens__tick"></i><span class="tokens__label">20K</span></button><button class="tokens__step" type="button" data-step="6" style="--i:6" aria-label="50,000 tokens"><i class="tokens__tick"></i><span class="tokens__label">50K</span></button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Price breakdown -->
+    <aside class="price-card">
+      <h2 class="price-card__title">Price breakdown:</h2>
+      <div class="price-card__row price-card__row--total"><span id="priceTokens">10,000 tokens</span><span class="price-card__sum" id="priceSum">$200</span></div>
+      <p class="price-card__note">Billed once</p>
+      <div class="price-card__row price-card__row--exp"><span>Expiration date</span><span><b>Aug 2, 2026</b> (90 days)</span></div>
+      <p class="price-card__pay">We're using your <a href="#">previous payment method</a>.</p>
+      <a class="btn price-card__btn" href="#checkout">Proceed to payment</a>
+    </aside>
+  </section>
+  <!-- ============ «Start with a name and company» — новый вариант белого блока ============ -->
+  <section class="flow2">
+    <div class="flow2__frame">
+      <h2 class="f2-title">Start with a name and company. Uncover the whole picture.</h2>
+      <p class="f2-sub">Explore your lead across <b>50+ data points</b> and research deeper with built-in AI enrichment.</p>
+
+      <!-- 01 — с чего начинаем -->
+      <div class="f2-start">
+        <i class="f2-dot" style="left:101px;top:64px;width:5px;height:5px;background:#ffe9bc"></i><i class="f2-dot" style="left:94px;top:48px;width:5px;height:5px;background:#ffe9bc"></i><i class="f2-dot" style="left:86px;top:58px;width:4px;height:4px;background:#ffe9bc"></i><i class="f2-dot" style="left:76px;top:65px;width:3px;height:3px;background:#fff4e4"></i><i class="f2-dot" style="left:49px;top:58px;width:3px;height:3px;background:#fff4e4"></i><i class="f2-dot" style="left:64px;top:46px;width:3px;height:3px;background:#fff4e4"></i><i class="f2-dot" style="left:187px;top:46px;width:5px;height:5px;background:#ffe9bc"></i><i class="f2-dot" style="left:195px;top:65px;width:5px;height:5px;background:#ffe9bc"></i><i class="f2-dot" style="left:205px;top:58px;width:4px;height:4px;background:#ffe9bc"></i><i class="f2-dot" style="left:213px;top:47px;width:3px;height:3px;background:#fff4e4"></i><i class="f2-dot" style="left:220px;top:64px;width:3px;height:3px;background:#fff4e4"></i><i class="f2-dot" style="left:238px;top:51px;width:3px;height:3px;background:#fff4e4"></i>
+        <img class="f2-start__bolt" src="img/enrich-bolt.png" alt="">
+        <p class="f2-start__caption">What you start with</p>
+        <div class="f2-input is-filled" style="top:126px">
+          <span class="f2-input__ico"><img src="img/flow2/prospect.svg" width="16" height="16" alt=""></span>
+          <span class="f2-input__label">Full name</span>
+          <span class="f2-input__value">Diana Kemmer</span>
+          <img class="f2-input__arrow" src="img/flow2/chevron-right.svg" width="24" height="24" alt="">
+        </div>
+        <div class="f2-input is-filled" style="top:200px">
+          <span class="f2-input__ico"><img src="img/flow2/company.svg" width="16" height="16" alt=""></span>
+          <span class="f2-input__label">Company name</span>
+          <span class="f2-input__value">Lumenfield</span>
+          <img class="f2-input__arrow" src="img/flow2/chevron-right.svg" width="24" height="24" alt="">
+        </div>
+        <div class="f2-input" style="top:274px">
+          <span class="f2-input__ico"><img src="img/flow2/email.svg" width="16" height="16" alt=""></span>
+          <span class="f2-input__label">Email</span>
+          <span class="f2-input__value">Add email address</span>
+          
+        </div>
+        <div class="f2-input" style="top:348px">
+          <span class="f2-input__ico"><img src="img/flow2/job-position.svg" width="16" height="16" alt=""></span>
+          <span class="f2-input__label">Job position</span>
+          <span class="f2-input__value">Add job position</span>
+          
+        </div>
+      </div>
+
+      <span class="f2-arrow" aria-hidden="true"><svg class="i" viewBox="0 0 24 24"><use href="#i-back"/></svg></span>
+
+      <!-- 02 — что получаем -->
+      <div class="f2-result">
+        <div class="f2-result__back" aria-hidden="true"></div>
+        <div class="f2-result__card">
+          <img class="f2-avatar" src="img/flow2/diana-kemmer.png" width="60" height="60" alt="">
+          <p class="f2-name">Diana Kemmer</p>
+          <p class="f2-meta">VP of Sales at Lumenfield<i></i>Austin, TX</p>
+        <div class="f2-row" style="top:120px"><img src="icons/enrichment-color-16.svg" width="16" height="16" alt=""><span class="f2-row__label">Email:</span><span class="f2-row__value"><i class="f2-valid"></i>diana.kemmer@gmail.com<img src="icons/gmail.svg" width="16" height="16" alt="Gmail"></span></div>
+        <div class="f2-row" style="top:162px"><img src="icons/enrichment-color-16.svg" width="16" height="16" alt=""><span class="f2-row__label">Phone number:</span><span class="f2-row__value">+1 (512) 555-0147</span></div>
+        <div class="f2-row" style="top:204px"><img src="icons/enrichment-color-16.svg" width="16" height="16" alt=""><span class="f2-row__label">Pain point:</span><span class="f2-row__value">Struggles to generate qualified leads and book meetings with decision-makers. Has difficulty finding verified contact information and reaching the right prospects.</span></div>
+        <div class="f2-row" style="top:246px"><img src="icons/enrichment-color-16.svg" width="16" height="16" alt=""><span class="f2-row__label">Bio:</span><span class="f2-row__value">Diana Kemmer is the VP of Sales at Lumenfield, based in Austin, Texas. She leads sales strategy, manages pipeline growth, and focuses on improving lead generation and conversion rates.</span></div>
+          <div class="f2-ai" style="top:288px">
+            <p class="f2-ai__title"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><defs><linearGradient id="f2-ai" x1="8" y1="1" x2="8" y2="15" gradientUnits="userSpaceOnUse"><stop stop-color="#FFDD7E"/><stop offset="1" stop-color="#FF6966"/></linearGradient></defs><path d="M8 1.5c.5 3.4 3.1 6 6.5 6.5-3.4.5-6 3.1-6.5 6.5-.5-3.4-3.1-6-6.5-6.5 3.4-.5 6-3.1 6.5-6.5Z" fill="url(#f2-ai)"/></svg>AI Research</p>
+            <p class="f2-ai__text">Lumenfield opened a London office in September. Suggested opener: “Congrats on the London launch — how are you ramping EMEA pipeline?”</p>
+          </div>
+          <p class="f2-more" style="top:373px"><img src="img/flow2/plus.svg" width="12" height="12" alt="">47 more fields</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Клиенты: заголовок + бегущая строка логотипов ============ -->
+  <section class="clients">
+    <div class="clients__card">
+      <h2 class="clients__title">Over <span class="clients__accent">300,000</span> businesses are scaling their<br>sales with Snov.io</h2>
+      <div class="logos" aria-label="Our clients">
+        <div class="logos__track">
+          <ul class="logos__list">
+          <li class="logos__item"><img src="img/logos/sendpulse.svg" alt="SendPulse" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/mgid.svg" alt="MGID" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/zendesk.svg" alt="Zendesk" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/whitebit.svg" alt="WhiteBIT" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/t-mobile.svg" alt="T-Mobile" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/netpeak.svg" alt="Netpeak" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/macpaw.svg" alt="MacPaw" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/payoneer.svg" alt="Payoneer" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/shipbob.svg" alt="ShipBob" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/jcdecaux.svg" alt="JCDecaux" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/kelly.svg" alt="Kelly" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/appsumo.svg" alt="AppSumo" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/lexisnexis.svg" alt="LexisNexis" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/se-ranking.svg" alt="SE Ranking" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/adp.svg" alt="ADP" height="56" loading="lazy"></li>
+          </ul>
+          <ul class="logos__list" aria-hidden="true">
+          <li class="logos__item"><img src="img/logos/sendpulse.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/mgid.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/zendesk.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/whitebit.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/t-mobile.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/netpeak.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/macpaw.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/payoneer.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/shipbob.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/jcdecaux.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/kelly.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/appsumo.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/lexisnexis.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/se-ranking.svg" alt="" height="56" loading="lazy"></li>
+          <li class="logos__item"><img src="img/logos/adp.svg" alt="" height="56" loading="lazy"></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- ============ CTA: демо ============ -->
+  <section class="demo-cta-wrap">
+    <div class="demo-cta">
+      <div class="demo-cta__media"><img src="img/plans-demo-video.png" width="160" height="160" alt=""></div>
+      <div class="demo-cta__body">
+        <div class="demo-cta__text">
+          <h2 class="demo-cta__title">Want to hear what we can do for you?</h2>
+          <p class="demo-cta__sub">Book a quick demo to explore how your KPIs can grow with Snov.io.</p>
+        </div>
+        <a class="btn btn--primary demo-cta__btn" href="#demo">Book a demo</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ Отзывы: «What our customers say» ============ -->
+  <section class="stories">
+    <h2 class="section-title">What our customers say</h2>
+    <div class="stories__viewport">
+      <div class="stories__track" id="storiesTrack">
+        <article class="story story--pink">
+          <div class="story__person">
+            <div class="story__who">
+              <div class="story__photo"><img src="img/testimonials/amanda-labruna.png" alt=""></div>
+              <div class="story__id">
+                <div class="story__logo"><img src="img/testimonials/logo-has.svg" width="136" height="32" alt=""></div>
+                <h3 class="story__name">Amanda Labruna</h3>
+                <p class="story__role">Co-founder and Communication Specialist, HAS Prospecção Corporativa</p>
+              </div>
+            </div>
+            <p class="story__quote">"With Snov.io, we've increased our contact list by 30%, adding over 40,000 leads."</p>
+          </div>
+          <div class="story__data">
+            <p class="story__stat">30%</p>
+            <p class="story__label">More leads data</p>
+            <a class="btn story__btn" href="#">Read the story<svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></a>
+          </div>
+        </article>
+        <article class="story story--peach">
+          <div class="story__person">
+            <div class="story__who">
+              <div class="story__photo"><img src="img/testimonials/deepak-shukla.png" alt=""></div>
+              <div class="story__id">
+                <div class="story__logo"><img src="img/testimonials/logo-pearl-lemon.svg" width="136" height="32" alt=""></div>
+                <h3 class="story__name">Deepak Shukla</h3>
+                <p class="story__role">Founder and CEO of Pearl Lemon</p>
+              </div>
+            </div>
+            <p class="story__quote">"One of our clients got 23 email meetings scheduled from just 117 emails sent with Snov.io, generating about $9,000 in revenue. Pretty incredible for a one month campaign!"</p>
+          </div>
+          <div class="story__data">
+            <p class="story__stat">19.6%</p>
+            <p class="story__label">client campaign conversion rate</p>
+            <a class="btn story__btn" href="#">Read the story<svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></a>
+          </div>
+        </article>
+        <article class="story story--blue">
+          <div class="story__person">
+            <div class="story__who">
+              <div class="story__photo"><img src="img/testimonials/felipe-traina.png" alt=""></div>
+              <div class="story__id">
+                <div class="story__logo"><img src="img/testimonials/logo-salestime.svg" width="136" height="32" alt=""></div>
+                <h3 class="story__name">Felipe Traina</h3>
+                <p class="story__role">Founder and CEO of Salestime</p>
+              </div>
+            </div>
+            <p class="story__quote">"With Snov.io, our volume of verified leads increased by 70%, and we drastically reduced countless hours of manual work."</p>
+          </div>
+          <div class="story__data">
+            <p class="story__stat">70%</p>
+            <p class="story__label">verified leads increased</p>
+            <a class="btn story__btn" href="#">Read the story<svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></a>
+          </div>
+        </article>
+        <article class="story story--pink">
+          <div class="story__person">
+            <div class="story__who">
+              <div class="story__photo"><img src="img/testimonials/vlad-anderson.png" alt=""></div>
+              <div class="story__id">
+                <div class="story__logo"><img src="img/testimonials/logo-litelog.svg" width="136" height="32" alt=""></div>
+                <h3 class="story__name">Vlad Anderson</h3>
+                <p class="story__role">Chief Growth Officer at Anderson Digital Growth</p>
+              </div>
+            </div>
+            <p class="story__quote">"With Snov.io, we increased our response rate by 20% and tripled the number of meetings booked per week"</p>
+          </div>
+          <div class="story__data">
+            <p class="story__stat">15-35%</p>
+            <p class="story__label">Increased response rate</p>
+            <a class="btn story__btn" href="#">Read the story<svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></a>
+          </div>
+        </article>
+        <article class="story story--teal">
+          <div class="story__person">
+            <div class="story__who">
+              <div class="story__photo"><img src="img/testimonials/ricard-colom.png" alt=""></div>
+              <div class="story__id">
+                <div class="story__logo"><img src="img/testimonials/logo-okisam.svg" width="136" height="32" alt=""></div>
+                <h3 class="story__name">Ricard Colom</h3>
+                <p class="story__role">Account Manager at Okisam.</p>
+              </div>
+            </div>
+            <p class="story__quote">"The open rate with Snov.io went from 25% to 73% in just one month, which resulted in 95 business meetings with potential customers."</p>
+          </div>
+          <div class="story__data">
+            <p class="story__stat">35%</p>
+            <p class="story__label">increase in lead conversion rate</p>
+            <a class="btn story__btn" href="#">Read the story<svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></a>
+          </div>
+        </article>
+        <article class="story story--blue">
+          <div class="story__person">
+            <div class="story__who">
+              <div class="story__photo story__photo--frame"><img src="img/testimonials/adrian-kempiak.png" alt=""></div>
+              <div class="story__id">
+                <div class="story__logo"><img src="img/testimonials/logo-neadoo.svg" width="136" height="32" alt=""></div>
+                <h3 class="story__name">Adrian Kempiak</h3>
+                <p class="story__role">CTO at Neadoo</p>
+              </div>
+            </div>
+            <p class="story__quote">“With properly prepared campaigns the response rate is incredible, usually at 75-80%.”</p>
+          </div>
+          <div class="story__data">
+            <p class="story__stat">80%</p>
+            <p class="story__label">average response rate</p>
+            <a class="btn story__btn" href="#">Read the story<svg class="i" aria-hidden="true"><use href="#i-arrow-small-right"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </div>
+    <div class="slider-dots" id="storiesDots"><button class="slider-dots__dot" aria-label="Story 1"></button><button class="slider-dots__dot" aria-label="Story 2"></button><button class="slider-dots__dot" aria-label="Story 3"></button><button class="slider-dots__dot" aria-label="Story 4"></button><button class="slider-dots__dot" aria-label="Story 5"></button><button class="slider-dots__dot" aria-label="Story 6"></button></div>
+  </section>
+
+  <!-- ============ FAQ ============ -->
+  <section class="faq">
+    <h2 class="section-title">Frequently asked questions</h2>
+    <div class="faq__list">
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">What data can I get with Snov.io Enrichment?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>Snov.io Enrichment currently covers <b>50+ data points</b>, including:</p>
+<ul><li>Phone number</li><li>Email address</li><li>Email verification status</li><li>Prospect info (industry, job position, employment history, bio, languages, certificates, similar profiles, and more)</li><li>Company info (funding, location, size, Crunchbase and LinkedIn links, company website, similar and affiliated companies, and more)</li></ul>
+<p><a class="link" href="https://snov.io/knowledgebase/prospect-enrichment-actions/" target="_blank" rel="noopener">Here’s the full list of data points</a>.</p>
+<p>Additionally, Snov.io Enrichment has <b>built-in AI enrichments</b> for:</p>
+<ul><li>Data cleanup</li><li>Bulk profile editing</li><li>Deep prospect research (perfect for pulling custom data like latest news, pain points, and any other insights)</li><li>Deep company research (competitor research, market insights, etc.)</li><li>Personalized copy creation based on lead’s unique context (openers, subject lines, emails, LinkedIn messages, etc.)</li><li>Custom data requests</li></ul></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">Can I try it for free?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>Of course! Each Snov.io account comes with free monthly enrichment tokens, from 25 tokens on a Free plan to 750 tokens on Ultra Sales Suite plans. You can use them to test and try any enrichment action.</p></div></div>
+      </div>
+      <div class="faq__item is-open">
+        <button class="faq__q" aria-expanded="true">How does Snov.io Enrichment pricing compare to other tools?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>With other enrichment tools $49/month often becomes $600-1,000+/month for active teams. With Snov.io your billing is predictable with $0.02 per token, scalable and stackable. With data points, we don't charge for the search, <b>we only charge for when results are provided</b>. With AI enrichments, you have the choice of different providers and models for <b>better spending control</b>. And, as always, <b>team seats are unlimited</b>, no extra payment.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">Are tokens different from credits?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>Yes, tokens are used specifically for enrichment operations. Tokens were introduced to give you more flexibility in choosing enrichment options and control over how much you spend.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">How long are enrichment tokens valid for?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>Free enrichment tokens that come with your plan are valid for 30 days and renew every month. Purchased token packages are valid for 90 days, reducing waste if your work is more seasonal. You can also stack packages – we’ll always use the one that expires sooner first.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">How much does each data point cost?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p><b>Data point enrichment</b> costs vary, starting from 0.2 tokens ($0.004). The cost depends on the data you’re trying to collect (for example, phone numbers start at 10 tokens). You are only charged for the enrichment if data is found.</p>
+<p><b>AI-powered enrichments</b> vary in cost depending on the complexity of the request and the model you choose. With AI enrichments you are charged for the search, regardless of whether data is found.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">Do you use external data providers?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>Yes, Snov.io Enrichment uses a proprietary database in combination with our partner data providers like Zeliq, Generect, MillionVerifier and more. We intend to keep growing the number of data providers to offer the best possible coverage across all data points.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">Can I use Snov.io enrichment via Claude, ChatGPT or other AI tools?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>Yes, Snov.io’s MCP fully supports enrichment (among other tools), meaning you can perform enrichment actions in Snov.io simply by asking your AI of choice to do it in your natural language. <a class="link" href="https://snov.io/knowledgebase/enrichment-in-snov-io-mcp/" target="_blank" rel="noopener">Find out more about connecting Snov.io to your AI via MCP</a>.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">Do I need a Sales Suite subscription to use enrichment?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>No, Enrichment is a separate tool and you do not need a Sales Suite subscription to use it.</p></div></div>
+      </div>
+      <div class="faq__item">
+        <button class="faq__q" aria-expanded="false">Can I combine my Sales Suite, LinkedIn Automation and Enrichment subscriptions?<svg class="i faq__arrow" aria-hidden="true"><use href="#i-arrow-small-bottom"/></svg></button>
+        <div class="faq__a"><div class="faq__body"><p>Yes, you can. When you combine all Snov.io tools, you get a complete sales tech stack covering lead generation, enrichment, email deliverability, multichannel email and LinkedIn campaigns, built-in CRM and more.</p></div></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ============ Footer CTA ============ -->
+<footer class="plans-footer">
+  <div class="plans-footer__inner">
+    <img class="plans-footer__img" src="img/plans-footer.png" width="296" height="173" alt="">
+    <div class="plans-footer__body">
+      <h2 class="plans-footer__title">Need help picking the best plan?</h2>
+      <p class="plans-footer__sub">Book a free personal demo with our customer success professional</p>
+      <a class="btn btn--primary plans-footer__btn" href="#demo">Book a demo<svg class="i" aria-hidden="true" viewBox="0 0 24 24"><path d="M11 7.75C10.5858 7.75 10.25 7.41421 10.25 7C10.25 6.58579 10.5858 6.25 11 6.25H17C17.4142 6.25 17.75 6.58579 17.75 7V13C17.75 13.4142 17.4142 13.75 17 13.75C16.5858 13.75 16.25 13.4142 16.25 13V8.81066L7.53033 17.5303C7.23744 17.8232 6.76256 17.8232 6.46967 17.5303C6.17678 17.2374 6.17678 16.7626 6.46967 16.4697L15.1893 7.75H11Z" fill-rule="evenodd" clip-rule="evenodd"/></svg></a>
+    </div>
+  </div>
+</footer>
+
+<script src="js/tooltip.js" defer></script>
+<script src="js/plans-blocks.js" defer></script>
+<script src="js/plans-tokens.js" defer></script>
+<script>
+  /* «Назад»: возвращаемся по истории, если пришли с нашего сайта; иначе — по ссылке */
+  document.querySelector('[data-back]').addEventListener('click', function (e) {
+    if (document.referrer && new URL(document.referrer).origin === location.origin && history.length > 1) {
+      e.preventDefault();
+      history.back();
+    }
+  });
+
+  /* привязка к целым пикселям: при центрировании блок нечётной ширины встаёт на .5px и иконки мылятся */
+  function snapToPixel(el) {
+    el.style.translate = '';
+    var frac = el.getBoundingClientRect().left % 1;
+    if (frac) el.style.translate = (-frac) + 'px 0';
+  }
+  var tabs = document.querySelector('.product-tabs');
+  document.fonts.ready.then(function () { snapToPixel(tabs); });
+  addEventListener('resize', function () { snapToPixel(tabs); });
+
+  /* переключатель продуктов */
+  document.querySelector('.product-tabs').addEventListener('click', function (e) {
+    var tab = e.target.closest('.product-tab');
+    if (!tab) return;
+    this.querySelectorAll('.product-tab').forEach(function (t) {
+      var on = t === tab;
+      t.classList.toggle('is-active', on);
+      t.setAttribute('aria-selected', String(on));
+    });
+  });
+</script>
+</body>
+</html>
