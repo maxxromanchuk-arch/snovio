@@ -14,7 +14,15 @@
   margin-block: auto;   /* на высоком экране — по центру */
   padding: 52px 0 40px; /* минимум 60px от шапки: 8 (отступ .app) + 52 */
 }
-.ai-start__orb { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.ai-start__orb { /* круг — на обёртке: Safari не рисует <video> со скруглением внутри трансформаций */
+  width: 64px;
+  height: 64px;
+  overflow: hidden;
+  border-radius: 50%;
+  background: url("../img/ai-orb-poster.png") center / cover; /* если видео не загрузится — первый кадр */
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+.ai-start__orb video { display: block; width: 100%; height: 100%; object-fit: cover; }
 .ai-start__hello { margin-top: 24px; color: var(--grey-main); font-size: 22px; font-weight: 400; line-height: 29px; text-align: center; } /* ≈1.3, целые px — при центрировании иконки не мылятся */
 .ai-start__hello b { font-weight: 600; }
 .ai-start__hello span { font-size: 20px; }
@@ -112,3 +120,72 @@
 /* hover: ссылка фиолетовая, стрелка чуть уезжает вправо на 2px */
 .quick-link:hover, .quick-link:focus-visible { color: var(--purple); }
 .quick-link:hover .i, .quick-link:focus-visible .i { color: var(--purple); transform: translateX(2px); }
+
+/* ---------- попап (Modal-Medium: 430px, отступы 30) ---------- */
+.modal {
+  width: 430px;
+  max-width: calc(100vw - 32px);
+  margin: auto;
+  padding: 30px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, .1);
+  color: var(--grey-main);
+  overflow: visible;
+}
+.modal::backdrop { background: rgba(25, 36, 53, .4); }
+.modal[open] { animation: modal-in .1s ease-out; }
+.modal[open]::backdrop { animation: backdrop-in .1s ease-out; }
+.modal.is-closing { animation: modal-out .12s ease-in forwards; }
+.modal.is-closing::backdrop { animation: backdrop-out .12s ease-in forwards; }
+@keyframes modal-in { from { opacity: 0; transform: scale(.96); } }   /* быстро проявляется и чуть «дорастает» */
+@keyframes modal-out { to { opacity: 0; transform: scale(.96); } }
+@keyframes backdrop-in { from { opacity: 0; } }
+@keyframes backdrop-out { to { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .modal[open], .modal[open]::backdrop, .modal.is-closing, .modal.is-closing::backdrop { animation: none; } }
+
+.modal__close { position: absolute; right: 30px; top: 25px; width: 24px; height: 24px; }
+.modal__close .i { color: var(--grey-dove); }
+.modal__head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+.modal__title { font-size: 20px; font-weight: 400; line-height: 24px; }
+.modal__text { font-size: 13px; line-height: 1.5; }
+.modal__body { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+
+.modal-guide {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 11px;
+  border: 1px solid var(--grey-ghost);
+  border-radius: 12px;
+  background: var(--white);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .08);
+  color: var(--grey-main);
+  font-size: 13px;
+  transition: border-color .15s, background-color .15s;
+}
+.modal-guide span { flex: 1; }
+.modal-guide .i { color: var(--grey-dove); }
+.modal-guide:hover { border-color: var(--grey-silver); background: var(--grey-desert); }
+
+.modal-or { display: flex; align-items: center; gap: 20px; color: var(--grey-dove); font-size: 13px; }
+.modal-or::before, .modal-or::after { content: ""; flex: 1; height: 1px; background: var(--grey-ghost); }
+
+.field__label { display: block; height: 20px; font-size: 13px; line-height: 1.5; }
+.field__box { position: relative; }
+.field__input {
+  width: 100%;
+  height: 34px;
+  padding: 0 32px 0 9px;
+  border: 1px solid var(--grey-ghost);
+  border-radius: var(--radius);
+  background: var(--white);
+  color: var(--grey-main);
+  font: 400 13px/1.5 Roboto, sans-serif;
+  outline: none;
+}
+.field__input:focus { border-color: var(--purple); }
+.field__action { position: absolute; right: 4px; top: 5px; width: 24px; height: 24px; }
+.field__hint { margin-top: 8px; font-size: 13px; line-height: 20px; }

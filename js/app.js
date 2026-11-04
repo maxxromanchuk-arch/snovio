@@ -10,6 +10,9 @@ var toast = (function () {
   }
   return function (text) {
     if (!region) return;
+    // открыт попап (<dialog>) — тост внутрь него, иначе он окажется под затемнением
+    var host = document.querySelector('dialog[open]') || document.body;
+    if (region.parentNode !== host) host.appendChild(region);
     region.querySelectorAll('.toast').forEach(close); // одновременно показываем один
     var el = document.createElement('div');
     el.className = 'toast';
