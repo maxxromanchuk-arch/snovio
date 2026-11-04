@@ -28,3 +28,16 @@
   });
   sync();
 })();
+
+/* при центрировании по высоте блок может встать на .5px — подтягиваем на целый пиксель */
+(function () {
+  var box = document.querySelector('.ai-start');
+  if (!box) return;
+  function snap() {
+    box.style.translate = '';
+    var frac = box.getBoundingClientRect().top % 1;
+    if (frac) box.style.translate = '0 ' + (-frac) + 'px';
+  }
+  snap();
+  addEventListener('resize', snap);
+})();
