@@ -7,9 +7,9 @@
 
 /* ---------- старт AI Assistant (Figma «Home - EN», 784:5739) ---------- */
 .home { justify-content: flex-start; }
-.ai-start { display: flex; flex-direction: column; align-items: center; padding-top: 92px; } /* орб на y=174: 74 шапка + 8 отступ .app + 92 */
+.ai-start { display: flex; flex-direction: column; align-items: center; padding: 52px 0 40px; } /* орб на y=134: 74 шапка + 8 отступ .app + 52 */
 .ai-start__orb { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
-.ai-start__hello { margin-top: 16px; color: var(--grey-main); font-size: 22px; font-weight: 400; line-height: 1.3; text-align: center; }
+.ai-start__hello { margin-top: 24px; color: var(--grey-main); font-size: 22px; font-weight: 400; line-height: 1.3; text-align: center; }
 .ai-start__hello b { font-weight: 600; }
 .ai-start__hello span { font-size: 20px; }
 
@@ -22,7 +22,8 @@
   border: 1px solid transparent;
   border-radius: 16px;
   /* градиентная рамка: голубой → сиреневый */
-  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(90deg, #9ec3f7, #b39bf6) border-box;
+  --ask-line: linear-gradient(90deg, #9ec3f7, #b39bf6);
+  background: linear-gradient(var(--white), var(--white)) padding-box, var(--ask-line) border-box;
   box-shadow: 0 8px 16px rgba(115, 87, 235, .08);
 }
 .ai-ask__input {
@@ -40,14 +41,15 @@
 }
 .ai-ask__input::placeholder { color: var(--grey-aluminium); }
 .ai-ask:focus-within { box-shadow: 0 8px 16px rgba(115, 87, 235, .14); }
+.ai-ask:hover { --ask-line: linear-gradient(90deg, #278eff 0%, #9450ff 100%); } /* hover: яркая рамка */
 .ai-ask__send { position: absolute; right: 11px; bottom: 11px; width: 34px; height: 34px; border-radius: var(--radius); background: var(--white); }
 .ai-ask__send .i { transform: rotate(180deg); color: var(--grey-aluminium); }
-.ai-ask__send[aria-disabled="false"] .i { color: var(--purple); }
-.ai-ask__send[aria-disabled="false"]:hover { background: var(--grey-desert); }
+.ai-ask__send[aria-disabled="false"] .i { color: var(--grey-dove); } /* есть текст: #666E7A */
+.ai-ask__send[aria-disabled="false"]:hover { background: var(--grey-zircon); } /* #F1F4F9 */
 .ai-ask__send[aria-disabled="true"] { cursor: default; }
 .ai-ask__send[aria-disabled="true"]:hover .i { color: var(--grey-aluminium); } /* выключенная: на hover не темнеет */
 
-.ai-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: 600px; max-width: 100%; margin-top: 24px; }
+.ai-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: 620px; max-width: 100%; margin-top: 24px; }
 .ai-chip {
   --line: #d9e6c4;
   display: inline-flex;
@@ -74,3 +76,33 @@
 .ai-chip--report:hover  { --fill: #f2fde5; --line: #f2fde5; }
 .ai-chip--leads:hover   { --fill: #eaf6ff; --line: #eaf6ff; }
 .ai-chip--replies:hover { --fill: #f3f0ff; --line: #f3f0ff; }
+
+/* ---------- быстрые ссылки: Prospecting / Deliverability / Outreach ---------- */
+.quick { display: flex; gap: 24px; width: 704px; max-width: 100%; margin-top: 53px; }
+.quick-card {
+  flex-shrink: 0;
+  width: 228px;
+  min-height: 244px;
+  padding: 19px 23px 13px; /* + бордер 1px: заголовок на 20px, низ 14px — как в макете */
+  border: 1px solid var(--grey-athens);
+  border-radius: 16px;
+  background: var(--white);
+}
+.quick-card__title { display: flex; align-items: center; gap: 4px; height: 24px; font-size: 13px; font-weight: 600; line-height: normal; }
+.quick-card__title .i { color: var(--grey-dove); }
+.quick-card__list { display: flex; flex-direction: column; gap: 1px; margin-top: 13px; list-style: none; }
+.quick-link {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 28px;
+  color: var(--grey-main);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+  transition: color .15s;
+}
+.quick-link .i { color: var(--grey-dove); transition: transform .2s var(--ease), color .15s; }
+/* hover: ссылка фиолетовая, стрелка чуть уезжает вправо на 2px */
+.quick-link:hover, .quick-link:focus-visible { color: var(--purple); }
+.quick-link:hover .i, .quick-link:focus-visible .i { color: var(--purple); transform: translateX(2px); }
