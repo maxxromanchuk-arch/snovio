@@ -1,0 +1,76 @@
+/* =========================================================
+   home.css — главная (Home)
+   ========================================================= */
+
+/* левое меню только с нижними разделами, всегда свёрнуто */
+.leftnav--tools-only { justify-content: flex-end; }
+
+/* ---------- старт AI Assistant (Figma «Home - EN», 784:5739) ---------- */
+.home { justify-content: flex-start; }
+.ai-start { display: flex; flex-direction: column; align-items: center; padding-top: 92px; } /* орб на y=174: 74 шапка + 8 отступ .app + 92 */
+.ai-start__orb { width: 64px; height: 64px; border-radius: 50%; object-fit: cover; }
+.ai-start__hello { margin-top: 16px; color: var(--grey-main); font-size: 22px; font-weight: 400; line-height: 1.3; text-align: center; }
+.ai-start__hello b { font-weight: 600; }
+.ai-start__hello span { font-size: 20px; }
+
+.ai-ask {
+  position: relative;
+  width: 704px;
+  max-width: 100%;
+  height: 140px;
+  margin-top: 32px;
+  border: 1px solid transparent;
+  border-radius: 16px;
+  /* градиентная рамка: голубой → сиреневый */
+  background: linear-gradient(var(--white), var(--white)) padding-box, linear-gradient(90deg, #9ec3f7, #b39bf6) border-box;
+  box-shadow: 0 8px 16px rgba(115, 87, 235, .08);
+}
+.ai-ask__input {
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 13px 60px 13px 13px;
+  border: 0;
+  border-radius: 15px;
+  background: transparent;
+  color: var(--grey-main);
+  font: 400 14px/1.6 Roboto, sans-serif;
+  resize: none;
+  outline: none;
+}
+.ai-ask__input::placeholder { color: var(--grey-aluminium); }
+.ai-ask:focus-within { box-shadow: 0 8px 16px rgba(115, 87, 235, .14); }
+.ai-ask__send { position: absolute; right: 11px; bottom: 11px; width: 34px; height: 34px; border-radius: var(--radius); background: var(--white); }
+.ai-ask__send .i { transform: rotate(180deg); color: var(--grey-aluminium); }
+.ai-ask__send[aria-disabled="false"] .i { color: var(--purple); }
+.ai-ask__send[aria-disabled="false"]:hover { background: var(--grey-desert); }
+.ai-ask__send[aria-disabled="true"] { cursor: default; }
+.ai-ask__send[aria-disabled="true"]:hover .i { color: var(--grey-aluminium); } /* выключенная: на hover не темнеет */
+
+.ai-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; width: 600px; max-width: 100%; margin-top: 24px; }
+.ai-chip {
+  --line: #d9e6c4;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 34px;
+  padding: 0 12px 0 7px;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  --fill: var(--white);
+  background: linear-gradient(var(--fill), var(--fill)) padding-box, linear-gradient(var(--line), var(--line)) border-box;
+  color: var(--grey-main);
+  font-size: 13px;
+  line-height: 1.5;
+  white-space: nowrap;
+  transition: background-color .15s;
+}
+/* обводки подсказок */
+.ai-chip--report  { --line: #badb96; }
+.ai-chip--leads   { --line: #abd5f6; }
+.ai-chip--replies { --line: #dbd2ff; }
+.ai-chip .i { color: var(--grey-dove); }
+/* hover: обводка пропадает (сливается с заливкой), остаётся только заливка */
+.ai-chip--report:hover  { --fill: #f2fde5; --line: #f2fde5; }
+.ai-chip--leads:hover   { --fill: #eaf6ff; --line: #eaf6ff; }
+.ai-chip--replies:hover { --fill: #f3f0ff; --line: #f3f0ff; }
