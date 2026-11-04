@@ -259,3 +259,42 @@ img, svg { display: block; flex-shrink: 0; }
 @keyframes toast-in  { from { opacity: 0; transform: translateY(8px); } }
 @keyframes toast-out { to   { opacity: 0; transform: translateY(8px); } }
 @media (prefers-reduced-motion: reduce) { .toast, .toast.is-leaving { animation: none; } }
+
+/* ---------- dropdown (Molecule/Dropdown + Item-dropdown simple text) ---------- */
+.dropdown {
+  display: flex;
+  flex-direction: column;
+  min-width: 140px;
+  padding: 4px; /* 5px до пунктов вместе с бордером, как в макете */
+  border: 1px solid var(--grey-silver);
+  border-radius: var(--radius);
+  background: var(--white);
+  filter: drop-shadow(0 2px 3.5px rgba(0, 0, 0, .1));
+  list-style: none;
+}
+.dropdown[hidden] { display: none; }
+.dropdown__item {
+  display: block;
+  width: 100%;
+  height: 34px;
+  padding: 0 10px;
+  border-radius: 5px;
+  color: var(--grey-main);
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  white-space: nowrap;
+}
+.dropdown__item:hover, .dropdown__item:focus-visible { background: var(--grey-zircon); outline: none; }
+
+/* ---------- выпадающее меню / селект: <div class="dd" [data-dd-select]> .dd__btn + ul.dropdown.dd__menu ----------
+   эталон — Sort by: список на 2px ниже кнопки, при открытии стрелка вниз → Arrow-small-up */
+.dd { position: relative; }
+.dd__menu { position: absolute; left: 0; top: calc(100% + 2px); z-index: 30; min-width: 100%; }
+.dd__arrow { display: block; flex-shrink: 0; width: 24px; height: 24px; }
+.dd__arrow .i { color: currentColor; }
+.btn .dd__arrow .i { color: var(--grey-dove); }
+.dd__arrow-up, .dd.is-open .dd__arrow-down { display: none; }
+.dd.is-open .dd__arrow-up { display: block; }
+.dropdown__item--icon { display: flex; align-items: center; gap: 8px; padding: 0 10px 0 6px; }
+.dropdown__item--icon .i { color: var(--grey-dove); }

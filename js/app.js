@@ -174,3 +174,48 @@ var toast = (function () {
     set(false);
   });
 })();
+
+/* Выпадающие меню и селекты (.dd): открыть/закрыть, выбор, клик вне, Esc, стрелки.
+   data-dd-select — селект: выбранный пункт пишется в .sort__value / [data-dd-value] */
+(function () {
+  var boxes = document.querySelectorAll('.dd');
+  if (!boxes.length) return;
+  function set(box, open) {
+    var btn = box.querySelector('.dd__btn'), menu = box.querySelector('.dd__menu');
+    menu.hidden = !open;
+    box.classList.toggle('is-open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (open) (menu.querySelector('.is-selected') || menu.querySelector('.dropdown__item')).focus();
+  }
+  function closeAll(except) { boxes.forEach(function (b) { if (b !== except && b.classList.contains('is-open')) set(b, false); }); }
+  boxes.forEach(function (box) {
+    var btn = box.querySelector('.dd__btn'), menu = box.querySelector('.dd__menu');
+    btn.addEventListener('click', function () { var open = menu.hidden; closeAll(box); set(box, open); });
+    menu.addEventListener('click', function (e) {
+      var item = e.target.closest('.dropdown__item');
+      if (!item) return;
+      if (box.hasAttribute('data-dd-select')) {
+        menu.querySelectorAll('.dropdown__item').forEach(function (i) {
+          var on = i === item;
+          i.classList.toggle('is-selected', on);
+          i.setAttribute('aria-selected', String(on));
+        });
+        var v = box.querySelector('.sort__value, [data-dd-value]');
+        if (v) v.textContent = item.textContent.trim();
+      }
+      set(box, false); btn.focus();
+    });
+    menu.addEventListener('keydown', function (e) {
+      var items = Array.prototype.slice.call(menu.querySelectorAll('.dropdown__item'));
+      var i = items.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') { items[(i + 1) % items.length].focus(); e.preventDefault(); }
+      if (e.key === 'ArrowUp') { items[(i - 1 + items.length) % items.length].focus(); e.preventDefault(); }
+    });
+  });
+  document.addEventListener('pointerdown', function (e) { if (!e.target.closest('.dd')) closeAll(); });
+  document.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape') return;
+    var open = document.querySelector('.dd.is-open');
+    if (open) { set(open, false); open.querySelector('.dd__btn').focus(); }
+  });
+})();

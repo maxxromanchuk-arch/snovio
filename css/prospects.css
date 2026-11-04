@@ -89,7 +89,24 @@
 .page-head__title h1 { font-size: 20px; font-weight: 400; white-space: nowrap; }
 .toolbar { display: flex; align-items: center; gap: 8px; }
 .toolbar__more { position: relative; }
-.toolbar__filter { margin-left: auto; }
+.toolbar__add { justify-content: flex-start; width: 160px; padding: 5px 4px 5px 13px; } /* по Figma 814:6452: иконка в 14px, стрелка в 5px от края (с бордером 1px) */
+.toolbar__add .dd__arrow { margin-left: auto; }
+.toolbar__sort { margin-left: auto; }
+.toolbar__filter { margin-left: 0; }
+
+/* Sort by + выпадающий список (Figma 814:7610) */
+.sort { display: flex; align-items: center; gap: 8px; }
+.sort__label { color: var(--grey-main); white-space: nowrap; }
+.sort__control { position: relative; }
+.sort__btn { /* как Add prospects, но без иконки слева: значение + стрелка */
+  justify-content: space-between;
+  width: 140px;
+  min-width: 100px;
+  padding-left: 10px; /* текст в 11px от края (с бордером 1px) */
+  padding-right: 4px; /* стрелка в 5px от края (с бордером 1px) */
+  border-radius: 8px;
+}
+.sort__value { overflow: hidden; text-overflow: ellipsis; }
 
 .content .promo { margin: var(--gap) 20px 0 0; }
 

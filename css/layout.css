@@ -49,7 +49,23 @@
   background: var(--purple);
 }
 
-.account { display: flex; align-items: center; gap: 12px; margin: 1px 20px 0 auto; }
+.account { display: flex; align-items: center; gap: 2px; margin: 1px 20px 0 auto; } /* поиск · events · уведомления — по 34px через 2px, аватар через 12px */
+.account__btn { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 5px; }
+.account__btn .i { color: var(--grey-dove); }
+.account__btn:hover .i { color: var(--purple); } /* hover: только иконка, без подложки */
+/* Events — в исходном SVG растровая картинка; перекрашиваем через маску (цвет = currentColor) */
+.account__events-ico {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin: 1px;
+  background: currentColor;
+  color: var(--grey-dove);
+  -webkit-mask: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAFNUlEQVR42u2cXWhcRRTHf0lWl0aDFgMGrA3VQoWiIhKwWOiDKQWJClKqBfsQQfKQB8WXvhQqqBQCFowoBPoiFCpSRbSUFsmLPrRgVChYDVSkGBFEWAkY3DXd9eHOhXXZvTNz5+Pu5p4/DCQ7s+ecOefOmTlnzl0QCAQCgUAgEAgEAoFAIBAIBAKBIDiGAtDcATwH7APGgYPA8ADr6DLQAL4FPgJW+1XQ00CrJO1DYLRfFH+iRIrvbJ8W7YJa4sUBeCiva8rrm0dF+f/DT8CxWMyqJXY5unYkhguSJz8b+4CroQwgyi/ueM8Ri6W4BExsIYVuB163mP9KCCFMGK+V4OleMtTFuE+m8wYMz5TIxTxhoI9rMZ/+GyX083MGeol27CwrdHqZ8RGIPa3pf6/EBnhE0z8LTLoyOa6x8iTlRpZuasC06wp4UtN/s+QGaGb03W2wSrRYF/+fiRs4ZExNVkBFdOzkASquBuhHzKiJp0/ZFWCsIFl0aejbt5oBrgBfADs7AqN1lS6IjU2HPWLgDHBOKbsX3gEODdKEBskAY8CLBuMuRZbrn9AMGppdfiHSRFcwz0a+FHEv0smyHPoYmrbpgBMdxf52KiTGLeS44MpswYLZ54EmfC2HAU4GkuUVCxk2gOddGe6wnLhrZvQwcEotXR/3tA3gM0XTdZXOWfKeL+oJzPP0xSzseiyHfHuKdoMNS+bbLY+XsSsYDnhMukXbgxYDuKJdFFdGYopjFjSvxzh+XfI4QRdfP2m5Keat4zHdcKMWIpgcxY4GWNppO++BxpKBfCY3grNFRaf7cb+oz6O4bsHfWg46pw3k013Anys6RZAl3KpHd2Z6+/awBb3DhsfiLBpObid0Lsikhv6oBb26wZi7LOidNxhzj6b/7342gEmhVg142ZDe75r+SeBrQ1qmV4V/aPoPFOl+vtIszxMWtF41dBtzHgJGm4jY5JhcCGoGgu2ypGlSgbfsuKHv97zPpW1PLMVfDBwN6opgz7aNneiIuHXy7M4pk2mkvmGZAQiaC5kLFF+cpXut0izhKjjGLOf+lm/lT0XMhRwKmHpwubhftOTltVjZdqLDESdq06Yj68FL1eBMZKbrAQ2wEPlhXAYedGV43YJhtYDVZtM+8eQRbBKIi66BmMnx6jWS96Lq9Dcanug8BdxvOHZvVqdJ2WEd2JbR7/uFtJ99LNseuOqR1pqa+wrweMa4f4tMReTBwYC03w1A80tN/8BVxv0CvG0w7g31BA6R/IqJDs8EkveO0ArZKCgPMm+5qVXpXSo+FVBO3bH5ouseUBTeV22KJK1d1/jwuko1VEmqHu4EfqX43/cZHlQDpPjGcrzOUL6xV9O/6boHrCNwOaY3XA3wsaZ/tOQGuE/Tf9nVAD9o+qdKrHxdDPSjgf6Mlpi8qN0dJ9Hnnry8OlVkaXo/I9otmckt2JAoP5xnmMB/Qe5WV/5x30xvGjL+YAsrfhbPN4I2bqOK3QtpvwFvkmQ3IXltv9LB85Y6iVXU36ngaQJrRH3eVONG2uRuqb4R9X/T8LvtvCtt3221ffc24E/1906SS6lnLeb+gsHxPRdcKpHL0mo2Ch2xNMB3wAPAoxIA98S2GEwuyJNefDx0RhRefDA6LYqP9qJ6Jk6VUPGrFPcLLT0xQ/JrJltV6bdIbuqqvhQWKn2wm6SyYYzkLvZekqvN4R5Z2GbH580uY9JzereTWzq+lTGvTTWmG++httgijQsqwF8qnVxTcc33csgTCAQCgUAgEAgEAoFAIBAIBII8+A8Ha9SwOF01pgAAAABJRU5ErkJggg==") center / contain no-repeat;
+          mask: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAFNUlEQVR42u2cXWhcRRTHf0lWl0aDFgMGrA3VQoWiIhKwWOiDKQWJClKqBfsQQfKQB8WXvhQqqBQCFowoBPoiFCpSRbSUFsmLPrRgVChYDVSkGBFEWAkY3DXd9eHOhXXZvTNz5+Pu5p4/DCQ7s+ecOefOmTlnzl0QCAQCgUAgEAgEAoFAIBAIBAKBIDiGAtDcATwH7APGgYPA8ADr6DLQAL4FPgJW+1XQ00CrJO1DYLRfFH+iRIrvbJ8W7YJa4sUBeCiva8rrm0dF+f/DT8CxWMyqJXY5unYkhguSJz8b+4CroQwgyi/ueM8Ri6W4BExsIYVuB163mP9KCCFMGK+V4OleMtTFuE+m8wYMz5TIxTxhoI9rMZ/+GyX083MGeol27CwrdHqZ8RGIPa3pf6/EBnhE0z8LTLoyOa6x8iTlRpZuasC06wp4UtN/s+QGaGb03W2wSrRYF/+fiRs4ZExNVkBFdOzkASquBuhHzKiJp0/ZFWCsIFl0aejbt5oBrgBfADs7AqN1lS6IjU2HPWLgDHBOKbsX3gEODdKEBskAY8CLBuMuRZbrn9AMGppdfiHSRFcwz0a+FHEv0smyHPoYmrbpgBMdxf52KiTGLeS44MpswYLZ54EmfC2HAU4GkuUVCxk2gOddGe6wnLhrZvQwcEotXR/3tA3gM0XTdZXOWfKeL+oJzPP0xSzseiyHfHuKdoMNS+bbLY+XsSsYDnhMukXbgxYDuKJdFFdGYopjFjSvxzh+XfI4QRdfP2m5Keat4zHdcKMWIpgcxY4GWNppO++BxpKBfCY3grNFRaf7cb+oz6O4bsHfWg46pw3k013Anys6RZAl3KpHd2Z6+/awBb3DhsfiLBpObid0Lsikhv6oBb26wZi7LOidNxhzj6b/7342gEmhVg142ZDe75r+SeBrQ1qmV4V/aPoPFOl+vtIszxMWtF41dBtzHgJGm4jY5JhcCGoGgu2ypGlSgbfsuKHv97zPpW1PLMVfDBwN6opgz7aNneiIuHXy7M4pk2mkvmGZAQiaC5kLFF+cpXut0izhKjjGLOf+lm/lT0XMhRwKmHpwubhftOTltVjZdqLDESdq06Yj68FL1eBMZKbrAQ2wEPlhXAYedGV43YJhtYDVZtM+8eQRbBKIi66BmMnx6jWS96Lq9Dcanug8BdxvOHZvVqdJ2WEd2JbR7/uFtJ99LNseuOqR1pqa+wrweMa4f4tMReTBwYC03w1A80tN/8BVxv0CvG0w7g31BA6R/IqJDs8EkveO0ArZKCgPMm+5qVXpXSo+FVBO3bH5ouseUBTeV22KJK1d1/jwuko1VEmqHu4EfqX43/cZHlQDpPjGcrzOUL6xV9O/6boHrCNwOaY3XA3wsaZ/tOQGuE/Tf9nVAD9o+qdKrHxdDPSjgf6Mlpi8qN0dJ9Hnnry8OlVkaXo/I9otmckt2JAoP5xnmMB/Qe5WV/5x30xvGjL+YAsrfhbPN4I2bqOK3QtpvwFvkmQ3IXltv9LB85Y6iVXU36ngaQJrRH3eVONG2uRuqb4R9X/T8LvtvCtt3221ffc24E/1906SS6lnLeb+gsHxPRdcKpHL0mo2Ch2xNMB3wAPAoxIA98S2GEwuyJNefDx0RhRefDA6LYqP9qJ6Jk6VUPGrFPcLLT0xQ/JrJltV6bdIbuqqvhQWKn2wm6SyYYzkLvZekqvN4R5Z2GbH580uY9JzereTWzq+lTGvTTWmG++httgijQsqwF8qnVxTcc33csgTCAQCgUAgEAgEAoFAIBAIBII8+A8Ha9SwOF01pgAAAABJRU5ErkJggg==") center / contain no-repeat;
+}
+.account__btn:hover .account__events-ico { color: var(--purple); }
+.account__avatar { margin-left: 10px; }
 .account__notif { position: relative; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 5px; }
 .account__notif .dot { position: absolute; right: 0; top: -4px; }
 .account__avatar {
@@ -153,3 +169,75 @@
 
 /* страницы без левой навигации (Plans) */
 .no-leftnav .app { padding-left: var(--gap); }
+
+/* ---------- top navigation ≤ 1700px: без иконок разделов, плотнее (Figma 809:5051) ---------- */
+@media (max-width: 1700px) {
+  .topnav__menu { gap: 6px; }
+  .topnav__link { padding-left: 8px; padding-right: 8px; }
+  .topnav__label { height: 24px; padding: 0 5px; } /* высота как с иконкой — иначе полоска активного пункта отрывается от низа шапки */
+  .topnav__label > .i { display: none; }
+}
+.account__notif .i { color: var(--grey-dove); transition: color .12s; }
+.account__notif:hover .i { color: var(--purple); } /* как у поиска и Events */
+
+/* ---------- поиск в шапке (Figma 822:9573 / 822:8948) ----------
+   1536px и уже — 220px, к 1920px пропорционально растёт до 328px и дальше не тянется.
+   Подпись «Filters» в кнопке появляется, когда поиску хватает места (container query). */
+.top-search {
+  container-type: inline-size;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: clamp(220px, calc(28.125vw - 212px), 328px);
+  height: 34px;
+  margin-right: 10px; /* до Events 12px вместе с общим gap 2px */
+  padding: 0 2px 0 7px;
+  border: 1px solid var(--grey-ghost);
+  border-radius: 22px;
+  background: var(--white);
+}
+.top-search > .i { color: var(--grey-dove); }
+.top-search__input {
+  flex: 1;
+  min-width: 0;
+  height: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--grey-main);
+  font: 400 13px/normal Roboto, sans-serif;
+  text-overflow: ellipsis;
+  outline: none;
+}
+.top-search__input::placeholder { color: var(--grey-aluminium); }
+.top-search__input::-webkit-search-cancel-button { cursor: pointer; }
+.top-search { transition: background-color .12s, border-color .12s; }
+.top-search:hover { border-color: var(--grey-silver); background: var(--grey-desert); } /* hover (Figma 822:11937), кнопка Filters остаётся белой */
+.top-search:focus-within, .top-search:focus-within:hover { border-color: var(--grey-dove); background: var(--white); } /* focus (Figma 822:11937): белый фон, обводка #666E7A */
+.top-search__filters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-shrink: 0;
+  width: 38px;
+  height: 28px;
+  margin-left: 4px; /* 8px от текста */
+  border: 1px solid var(--grey-ghost);
+  border-radius: 22px;
+  background: var(--white);
+  filter: drop-shadow(0 1px 1px rgba(31, 40, 44, .06));
+  color: var(--grey-main);
+  font-size: 13px;
+}
+.top-search__filters .i { color: var(--grey-dove); }
+.top-search__filters:hover { border-color: var(--grey-silver); background: var(--grey-desert); }
+.top-search__filters-label { display: none; }
+@container (min-width: 300px) {
+  .top-search__filters { width: 76px; }
+  .top-search__filters-label { display: inline; }
+}
+/* уже 1480px поиск не помещается рядом с меню — остаётся только иконка (как раньше) */
+@media (max-width: 1479px) {
+  .top-search, .top-search:hover { width: 34px; padding: 0; justify-content: center; border-color: transparent; background: none; }
+  .top-search__input, .top-search__filters { display: none; }
+}
