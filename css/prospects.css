@@ -253,3 +253,8 @@
 .tool-item__desc { color: var(--grey-dove); }
 .tutorial-link { display: inline-flex; align-items: center; gap: 4px; margin: 16px 0 0 11px; color: var(--purple); }
 .tutorial-link .i { color: var(--purple); }
+
+/* поиск по таблице: строка «ничего не найдено» */
+.grid tr.is-hidden { display: none; }
+.grid .no-results td { height: 120px; color: var(--grey-dove); text-align: left; padding-left: 52px; }
+.grid .no-results b { color: var(--grey-main); font-weight: 500; }

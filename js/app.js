@@ -185,7 +185,14 @@ var toast = (function () {
     menu.hidden = !open;
     box.classList.toggle('is-open', open);
     btn.setAttribute('aria-expanded', String(open));
-    if (open) (menu.querySelector('.is-selected') || menu.querySelector('.dropdown__item')).focus();
+    if (open) {
+      // не хватает места снизу (например, в прокручиваемой панели) — открываем вверх
+      box.classList.remove('dd--up');
+      var scroller = box.closest('.side-panel__body');
+      var limit = scroller ? scroller.getBoundingClientRect().bottom : innerHeight;
+      if (menu.getBoundingClientRect().bottom > limit - 8) box.classList.add('dd--up');
+      var f = menu.querySelector('.is-selected, .dropdown__item, input'); if (f) f.focus({ preventScroll: true });
+    }
   }
   function closeAll(except) { boxes.forEach(function (b) { if (b !== except && b.classList.contains('is-open')) set(b, false); }); }
   boxes.forEach(function (box) {
@@ -217,5 +224,31 @@ var toast = (function () {
     if (e.key !== 'Escape') return;
     var open = document.querySelector('.dd.is-open');
     if (open) { set(open, false); open.querySelector('.dd__btn').focus(); }
+  });
+})();
+
+/* Панель Filters: открывается кнопкой Filters (в поиске и в тулбаре), закрывается крестиком, Esc, кликом вне */
+(function () {
+  var panel = document.getElementById('filtersPanel');
+  if (!panel) return;
+  panel.hidden = false;
+  var openers = document.querySelectorAll('.top-search__filters, .toolbar__filter');
+  var last = null;
+  function set(open) {
+    panel.classList.toggle('is-open', open);
+    openers.forEach(function (b) { b.setAttribute('aria-expanded', String(open)); });
+    if (open) panel.querySelector('.side-panel__close').focus({ preventScroll: true });
+    else if (last) last.focus({ preventScroll: true });
+  }
+  openers.forEach(function (b) {
+    b.setAttribute('aria-controls', 'filtersPanel');
+    b.addEventListener('click', function (e) { e.stopPropagation(); last = b; set(!panel.classList.contains('is-open')); });
+  });
+  panel.addEventListener('click', function (e) { if (e.target.closest('[data-panel-close]')) set(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && panel.classList.contains('is-open')) set(false); });
+  document.addEventListener('pointerdown', function (e) {
+    if (!panel.classList.contains('is-open') || panel.contains(e.target)) return;
+    if (Array.prototype.some.call(openers, function (b) { return b.contains(e.target); })) return;
+    set(false);
   });
 })();
