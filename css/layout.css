@@ -71,8 +71,8 @@
 .account__avatar {
   display: grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background: #c3c8d0;
   color: var(--white);
@@ -181,63 +181,81 @@
 .account__notif:hover .i { color: var(--purple); } /* как у поиска и Events */
 
 /* ---------- поиск в шапке (Figma 822:9573 / 822:8948) ----------
-   1536px и уже — 220px, к 1920px пропорционально растёт до 328px и дальше не тянется.
-   Подпись «Filters» в кнопке появляется, когда поиску хватает места (container query). */
+   Занимает место между меню и иконками: от AI Assistant минимум 52px, ширина 200–464px.
+   В фокусе, если он уже 248px, растёт до 248px за счёт отступа до меню.
+   Не хватает места даже на 200px — остаётся только иконка (js/topnav.js → .is-compact). */
+.topnav .account { flex: 1; min-width: 0; justify-content: flex-end; margin-left: 52px; transition: margin-left .2s var(--ease); }
+.topnav .account > :not(.top-search) { flex-shrink: 0; } /* иконки и аватар не сжимаются — ужимается только поиск */
 .top-search {
   container-type: inline-size;
   display: flex;
   align-items: center;
   gap: 4px;
-  width: clamp(220px, calc(28.125vw - 212px), 328px);
-  height: 34px;
+  flex: 0 1 464px; /* максимум 464px */
+  min-width: 200px;
+  height: 38px;
   margin-right: 10px; /* до Events 12px вместе с общим gap 2px */
-  padding: 0 2px 0 7px;
+  padding: 0 4px 0 7px; /* кнопка Filters в 4px от обводки со всех сторон */
   border: 1px solid var(--grey-ghost);
   border-radius: 22px;
   background: var(--white);
+  transition: min-width .2s var(--ease), flex-basis .2s var(--ease), background-color .12s, border-color .12s;
 }
-.top-search > .i { color: var(--grey-dove); }
+.top-search > .i { color: var(--grey-dove); flex-shrink: 0; }
+
+/* поле + свой плейсхолдер: текст с многоточием не меняется при фокусе */
+.top-search__field { position: relative; flex: 1; min-width: 0; height: 100%; }
 .top-search__input {
-  flex: 1;
-  min-width: 0;
+  width: 100%;
   height: 100%;
   border: 0;
   background: transparent;
   color: var(--grey-main);
   font: 400 13px/normal Roboto, sans-serif;
-  text-overflow: ellipsis;
   outline: none;
 }
-.top-search__input::placeholder { color: var(--grey-aluminium); }
+.top-search__input::placeholder { color: transparent; }
 .top-search__input::-webkit-search-cancel-button { cursor: pointer; }
-.top-search { transition: background-color .12s, border-color .12s; }
-.top-search:hover { border-color: var(--grey-silver); background: var(--grey-desert); } /* hover (Figma 822:11937), кнопка Filters остаётся белой */
-.top-search:focus-within, .top-search:focus-within:hover { border-color: var(--grey-dove); background: var(--white); } /* focus (Figma 822:11937): белый фон, обводка #666E7A */
+.top-search__ph {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--grey-aluminium);
+  white-space: nowrap;
+  pointer-events: none;
+}
+.top-search__ph { display: block; line-height: 36px; text-overflow: ellipsis; }
+.top-search__input:not(:placeholder-shown) + .top-search__ph { display: none; }
+
+/* hover: либо поле, либо кнопка Filters — не оба сразу */
+.top-search:hover:not(:focus-within):not(:has(.top-search__filters:hover)) { border-color: var(--grey-aluminium); } /* hover: только обводка #999FA7, фон белый */
+.top-search:focus-within, .top-search:focus-within:hover { border-color: var(--grey-dove); background: var(--white); }
+
 .top-search__filters {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 4px;
   flex-shrink: 0;
-  width: 38px;
+  width: 36px;
   height: 28px;
   margin-left: 4px; /* 8px от текста */
-  border: 1px solid var(--grey-ghost);
   border-radius: 22px;
-  background: var(--white);
-  filter: drop-shadow(0 1px 1px rgba(31, 40, 44, .06));
+  background: var(--grey-zircon); /* Figma 833:5644: серая плашка без обводки */
   color: var(--grey-main);
   font-size: 13px;
 }
 .top-search__filters .i { color: var(--grey-dove); }
-.top-search__filters:hover { border-color: var(--grey-silver); background: var(--grey-desert); }
+.top-search__filters:hover { background: var(--grey-athens); }
 .top-search__filters-label { display: none; }
 @container (min-width: 300px) {
   .top-search__filters { width: 76px; }
   .top-search__filters-label { display: inline; }
 }
-/* уже 1480px поиск не помещается рядом с меню — остаётся только иконка (как раньше) */
-@media (max-width: 1479px) {
-  .top-search, .top-search:hover { width: 34px; padding: 0; justify-content: center; border-color: transparent; background: none; }
-  .top-search__input, .top-search__filters { display: none; }
-}
+
+/* места нет даже на 200px — только иконка */
+.top-search.is-compact, .top-search.is-compact:hover { flex: 0 0 34px; min-width: 0; padding: 0; justify-content: center; border-color: transparent; background: none; }
+.top-search.is-compact .top-search__field, .top-search.is-compact .top-search__filters { display: none; }
+
