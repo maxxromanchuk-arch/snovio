@@ -3,6 +3,29 @@
    Location / Company location / Company domain / Campaign status — в демо-таблице нет данных:
    выбираются и показываются в активных, но строки не отсекают. */
 (function () {
+
+  // Раздел раскрывается и сворачивается плавно: содержимое стоит на месте, место под ним растёт/уменьшается.
+  // Шапки разделов не прыгают — растущий/сжимающийся блок просто двигает их вниз/вверх.
+  // При закрытии класс is-open снимается сразу (стрелка разворачивается мгновенно),
+  // а is-closing держит содержимое видимым, пока блок сворачивается.
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function slide(sec, open) {
+    var body = sec.querySelector('.f-sec__body');
+    sec.classList.toggle('is-closing', !open);
+    if (!body || reduceMotion || !body.animate) { sec.classList.remove('is-closing'); return; }
+    var a = body._slide;
+    if (a) { if (a._open !== open) { a._open = open; a.reverse(); } return; } // передумали на полпути — разворачиваем ход
+    var h = body.offsetHeight;
+    var shut = { marginBottom: -h + 'px', clipPath: 'inset(0 0 ' + h + 'px 0)' };
+    var full = { marginBottom: '0px', clipPath: 'inset(0 0 0 0)' };
+    a = body.animate(open ? [shut, full] : [full, shut], { duration: 250, easing: 'ease-out' });
+    a._open = open;
+    body._slide = a;
+    a.onfinish = a.oncancel = function () {
+      body._slide = null;
+      if (!a._open) sec.classList.remove('is-closing');
+    };
+  }
   var panel = document.getElementById('filtersPanel');
   if (!panel) return;
   var body = document.getElementById('filtersBody');
@@ -12,7 +35,7 @@
     name: 'Name', email: 'Email', position: 'Position', location: 'Location',
     company: 'Company', industry: 'Industry', companyLocation: 'Company location', companyDomain: 'Company domain',
     emailStatus: 'Email status', emailDomain: 'Email domain', hasEmail: 'Email', hasLinkedin: 'LinkedIn',
-    lists: 'List', tags: 'Tag', campaignProgress: 'Campaign', campaignEngaged: 'Campaign'
+    lists: 'Prospect list', tags: 'Tag', campaignProgress: 'Campaign', campaignEngaged: 'Campaign'
   };
   var state = {};
   function blank() {
@@ -87,8 +110,7 @@
     prospect: ['name', 'email', 'position', 'location'],
     company: ['company', 'industry', 'companyLocation', 'companyDomain'],
     contact: ['emailStatus', 'emailDomain', 'hasEmail', 'hasLinkedin'],
-    lists: ['lists', 'tags'],
-    campaign: ['campaignProgress', 'campaignEngaged']
+    lists: ['lists', 'tags', 'campaignProgress', 'campaignEngaged']
   };
   function chipText(k) {
     var v = state[k];
@@ -96,12 +118,28 @@
     if (Array.isArray(v)) return LABELS[k] + ': ' + (v.length > 2 ? v.slice(0, 2).join(', ') + ' +' + (v.length - 2) : v.join(', '));
     return LABELS[k] + ': ' + v.trim();
   }
+  // Чип наверху появляется/обновляется только когда ушли с поля: пока курсор в инпуте
+  // или открыт селект, наверху остаётся прежнее значение этого фильтра (или ничего).
+  // Таблица и счётчики секций при этом обновляются сразу.
+  var shown = {};
+  function held(k) {
+    var c = body.querySelector('[data-f="' + k + '"]');
+    if (!c) return false;
+    if (c.classList.contains('f-ms')) return c.classList.contains('is-open');
+    if (c.matches('input.f-input, .f-tokens')) return c.contains(document.activeElement);
+    return false;
+  }
   function renderUI() {
-    var keys = Object.keys(state).filter(isSet);
+    Object.keys(state).forEach(function (k) {
+      if (held(k)) return;
+      if (isSet(k)) shown[k] = chipText(k); else delete shown[k];
+    });
+    var keys = Object.keys(state).filter(function (k) { return shown[k] !== undefined; });
     var bar = body.querySelector('.f-active');
     bar.hidden = !keys.length;
     bar.querySelector('.f-active__chips').innerHTML = keys.map(function (k) {
-      return '<span class="f-active__chip" title="' + esc(chipText(k)) + '"><span>' + esc(chipText(k)) + '</span><button type="button" data-f-remove="' + k + '" aria-label="Remove ' + esc(LABELS[k]) + ' filter"><svg class="i i--16" aria-hidden="true"><use href="#i-close-tag-16"/></svg></button></span>';
+      var t = shown[k], cut = t.indexOf(': ');
+      return '<span class="f-active__chip" title="' + esc(t) + '"><span class="f-active__text"><span class="f-active__key">' + esc(t.slice(0, cut + 1)) + '</span> ' + esc(t.slice(cut + 2)) + '</span><button type="button" data-f-remove="' + k + '" aria-label="Remove ' + esc(LABELS[k]) + ' filter"><svg class="i i--16" aria-hidden="true"><use href="#i-close-tag-filter"/></svg></button></span>';
     }).join('');
     Object.keys(SECTIONS).forEach(function (s) {
       var n = SECTIONS[s].filter(isSet).length;
@@ -136,6 +174,8 @@
   /* ---------- текстовые поля ---------- */
   body.querySelectorAll('input.f-input[data-f]').forEach(function (i) {
     i.addEventListener('input', function () { state[i.dataset.f] = i.value; apply(); });
+    // Enter = как клик в пустое место: уходим с поля, фильтр переносится наверх
+    i.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); i.blur(); } });
   });
 
   /* ---------- токены ---------- */
@@ -143,7 +183,7 @@
     box.querySelectorAll('.f-token').forEach(function (t) { t.remove(); });
     var input = box.querySelector('.f-tokens__input');
     state[box.dataset.f].forEach(function (v, n) {
-      input.insertAdjacentHTML('beforebegin', '<span class="f-token">' + esc(v) + '<button type="button" data-i="' + n + '" aria-label="Remove ' + esc(v) + '"><svg class="i i--16" aria-hidden="true"><use href="#i-close-tag-16"/></svg></button></span>');
+      input.insertAdjacentHTML('beforebegin', '<span class="f-token">' + esc(v) + '<button type="button" data-i="' + n + '" aria-label="Remove ' + esc(v) + '"><svg class="i i--16" aria-hidden="true"><use href="#i-close-tag-filter"/></svg></button></span>');
     });
   }
   body.querySelectorAll('.f-tokens').forEach(function (box) {
@@ -155,7 +195,8 @@
       input.value = ''; renderTokens(box); apply();
     }
     input.addEventListener('keydown', function (e) {
-      if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); add(); }
+      if (e.key === 'Enter') { e.preventDefault(); add(); input.blur(); } // Enter — добавить и применить (уйти с поля)
+      else if (e.key === ',') { e.preventDefault(); add(); } // запятая — добавить и остаться в поле
       else if (e.key === 'Backspace' && !input.value && state[k].length) { state[k].pop(); renderTokens(box); apply(); }
     });
     input.addEventListener('blur', function () { if (input.value.trim()) add(); });
@@ -211,13 +252,34 @@
   /* ---------- секции, сбросы, удаление активных ---------- */
   body.addEventListener('click', function (e) {
     var t = e.target.closest('.f-sec__toggle');
-    if (t) { var sec = t.closest('.f-sec'); var open = !sec.classList.contains('is-open'); sec.classList.toggle('is-open', open); t.setAttribute('aria-expanded', String(open)); return; }
+    if (t) { var sec = t.closest('.f-sec'); var open = !sec.classList.contains('is-open'); sec.classList.toggle('is-open', open); t.setAttribute('aria-expanded', String(open)); slide(sec, open); return; }
     var r = e.target.closest('.f-sec__reset');
     if (r) { var s = r.closest('.f-sec').dataset.sec; reset(Object.keys(state).filter(function (k) { return SECTIONS[s].indexOf(k) === -1; })); return; }
     var rm = e.target.closest('[data-f-remove]');
     if (rm) { var k = rm.dataset.fRemove; reset(Object.keys(state).filter(function (x) { return x !== k; })); }
   });
   panel.addEventListener('click', function (e) { if (e.target.closest('[data-f-clear-all]')) reset([]); });
+
+  // ушли с инпута — переносим фильтр наверх; закрылся селект — тоже
+  body.addEventListener('focusout', function (e) {
+    if (e.target.matches('input.f-input[data-f], .f-tokens__input')) setTimeout(renderUI, 0);
+  });
+  if (window.MutationObserver) body.querySelectorAll('.f-ms').forEach(function (m) {
+    var was = m.classList.contains('is-open');
+    new MutationObserver(function () {
+      var now = m.classList.contains('is-open');
+      if (was && !now) renderUI();
+      was = now;
+    }).observe(m, { attributes: true, attributeFilter: ['class'] });
+  });
+
+  // Show — применить: кнопка Filters в поиске становится сиреневой со счётчиком
+  function applyToSearch() {
+    if (window.setAppliedFilters) window.setAppliedFilters(Object.keys(state).filter(isSet).map(chipText));
+  }
+  panel.addEventListener('click', function (e) { if (e.target.closest('.filters__show')) applyToSearch(); });
+  // крестик в строке «Applied:» в поиске — сбрасываем всё
+  document.addEventListener('filters:clear', function () { reset([]); applyToSearch(); });
 
   renderUI();
   run();

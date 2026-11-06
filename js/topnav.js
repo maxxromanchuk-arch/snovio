@@ -56,7 +56,7 @@
   var count = form.querySelector('.top-search__count');
   var KEY = 'snovio.recentSearches', MAX = 5;
   var DEFAULTS = ['Max Romanchuk', 'cochenco.com', 'linkedin.com/in/maxromanchuk/'];
-  var recent, filter = false, active = -1;
+  var recent, applied = [], active = -1; // applied — фильтры, применённые кнопкой Show в панели Filters
   try { recent = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
   if (!Array.isArray(recent)) recent = DEFAULTS.slice();
   function save() { try { localStorage.setItem(KEY, JSON.stringify(recent)); } catch (e) {} }
@@ -72,10 +72,18 @@
     active = all.length && i >= 0 ? (i % all.length + all.length) % all.length : -1;
     all.forEach(function (el, n) { el.classList.toggle('is-active', n === active); el.setAttribute('aria-selected', String(n === active)); });
   }
+  // кнопка Filters в поиске: сиреневая со счётчиком, пока применён хотя бы один фильтр
+  function syncFilter() {
+    var n = applied.length;
+    form.classList.toggle('has-filter', n > 0);
+    count.hidden = !n;
+    count.textContent = n;
+    filterRow.hidden = !n;
+    if (n) filterRow.querySelector('.search-pop__filter-text').innerHTML = 'Applied: <b>' + esc(applied.join(', ')) + '</b>';
+  }
+  window.setAppliedFilters = function (list) { applied = (list || []).slice(); syncFilter(); };
   function render() {
-    filterRow.hidden = !filter;
-    form.classList.toggle('has-filter', filter);
-    count.hidden = !filter;
+    syncFilter();
     list.innerHTML = recent.map(function (r, n) {
       return '<li class="search-pop__item" role="option" id="ts-opt-' + n + '" data-value="' + esc(r) + '">' +
         '<svg class="i i--16" aria-hidden="true"><use href="#i-time-16"/></svg>' +
@@ -224,7 +232,7 @@
         recent = recent.filter(function (r) { return r !== v; });
       }
       if (act.dataset.act === 'clear-recent') recent = [];
-      if (act.dataset.act === 'clear-filter') filter = false;
+      if (act.dataset.act === 'clear-filter') { applied = []; document.dispatchEvent(new CustomEvent('filters:clear')); }
       save(); render(); input.focus(); return;
     }
     var it = e.target.closest('.search-pop__item');

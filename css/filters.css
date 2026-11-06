@@ -21,40 +21,44 @@
 .filters__results b { font-weight: 700; }
 .filters__show { min-width: 136px; justify-content: center; }
 
-/* активные фильтры — липкая строка сверху */
+/* активные фильтры — липкий блок сверху (Figma 853:6116) */
 .f-active {
   position: sticky;
   top: 0;
   z-index: 3;
   display: flex;
-  align-items: flex-start;
-  gap: 8px;
-  padding: 12px 16px;
-  border-bottom: 1px solid var(--grey-athens);
-  background: #f9f9fb;
+  flex-direction: column;
+  gap: 2px;
+  padding: 12px 16px 16px; /* сверху до «Active:» 12px */
+  border-bottom: 1px solid #ebecf0;
+  background: #fff;
 }
 .f-active[hidden] { display: none; }
-.f-active__label { flex-shrink: 0; height: 26px; line-height: 26px; color: var(--grey-dove); }
-.f-active__chips { display: flex; flex-wrap: wrap; gap: 6px; flex: 1; min-width: 0; }
+.f-active__label { font-size: 13px; line-height: 20px; color: var(--grey-main); }
+.f-active__row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; min-width: 0; }
+.f-active__chips { display: contents; }
 .f-active__chip {
-  display: inline-flex;
+  display: flex;
+  height: 24px;
+  padding: 0 6px 0 8px;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   max-width: 100%;
-  height: 26px;
-  padding: 0 4px 0 10px;
-  border: 1px solid #c9bcf8;
-  border-radius: 13px;
-  background: #f2eefe;
-  color: var(--purple);
+  border-radius: 6px;
+  background: #f1f4f9;
+  color: var(--grey-main);
+  font-size: 12px;
   font-weight: 500;
+  line-height: normal;
   white-space: nowrap;
 }
-.f-active__chip span { overflow: hidden; text-overflow: ellipsis; }
-.f-active__chip button { display: grid; place-items: center; width: 18px; height: 18px; border-radius: 50%; color: var(--purple); }
-.f-active__chip button:hover { background: #e3dcff; }
-.f-active__chip .i { color: currentColor; }
-.f-active__clear { flex-shrink: 0; height: 26px; color: var(--purple); }
+.f-active__text { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.f-active__key { color: #666e7a; }
+.f-active__chip button { display: grid; place-items: center; flex-shrink: 0; width: 16px; height: 16px; color: #666e7a; }
+.f-active__chip:hover { background: #ebecf0; }
+.f-active__chip button:hover { color: #192435; } /* ховер на крестик */
+.f-active__chip .i { width: 16px; height: 16px; color: currentColor; }
+.f-active__clear { flex-shrink: 0; margin-left: 4px; font-size: 13px; line-height: 1.5; color: #7d62ec; }
 .f-active__clear:hover { color: var(--purple-hover); }
 
 /* секции */
@@ -89,7 +93,7 @@
 .f-field--wide { grid-column: 1 / -1; }
 .f-label { font-weight: 500; line-height: 20px; }
 .f-hint { margin-left: 4px; color: var(--grey-dove); font-weight: 400; }
-.f-help { color: var(--grey-dove); font-size: 12px; line-height: 1.4; }
+.f-help { color: var(--grey-dove); font-size: 12px; line-height: 16px; } /* целая высота строки — поля ниже не съезжают на полпикселя */
 .f-input {
   width: 100%;
   height: 34px;
@@ -194,3 +198,89 @@
 .f-ms__opt input:checked + .f-ms__box .i { display: block; }
 .f-ms__opt input:focus-visible + .f-ms__box { outline: 2px solid var(--purple); outline-offset: 1px; }
 .f-ms__opt.is-hidden { display: none; }
+
+/* =========================================================
+   Синхронизация с Figma 847:7273 (Filters), инпут 847:7313, селект 847:7297
+   ========================================================= */
+
+/* шапка: заголовок + серый подзаголовок (без «пилюли»), крестик 34px в 16px от края */
+.filters__title-row { flex-direction: column; align-items: flex-start; gap: 3px; }
+.filters__live {
+  height: auto;
+  padding: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--grey-dove);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+}
+.side-panel--filters .side-panel__head { align-items: flex-start; padding: 16px 16px 0; }
+
+/* секции: шапка 48px, стрелка 24px слева (открыто — вниз, закрыто — вправо), заголовок 14px/500 через 4px */
+.f-sec__toggle { gap: 4px; height: 48px; }
+.f-sec__chev { order: -1; width: 24px; height: 24px; margin: 0; transform: rotate(-90deg); }
+.f-sec.is-open .f-sec__chev { transform: none; }
+.f-sec__title { font-size: 14px; font-weight: 500; line-height: normal; }
+.f-sec__count { margin-left: 4px; }
+.f-sec__reset { margin-left: auto; }
+
+/* сетка полей: колонки 280px с зазором 17px, ряды через 24px, внизу секции 24px */
+/* от низа поля до верха букв следующей подписи — 16px (13px + ~2.75px воздуха внутри подписи) */
+/* от стрелки/заголовка раздела до подписи первого поля — 20px (шапка 48px, стрелка до 36px, +8px) */
+.f-sec__body { gap: 13px; padding: 8px 16px 24px; }
+.f-grid { column-gap: 17px; row-gap: 13px; }
+
+/* поле: подпись 20px / 13px Regular вплотную к инпуту */
+.f-field { gap: 0; }
+/* подпись: блок 20px, текст поднят на 2.5px → от низа букв до инпута/селекта 8px */
+.f-label { display: block; height: 20px; font-weight: 400; line-height: 15px; }
+.f-field > .f-help, .f-field > .f-chips { margin-top: 6px; }
+
+/* input: 34px, 1px #C7CFDA, radius 8, текст в 10px от обводки, без тени */
+.f-input { padding: 0 10px; box-shadow: none; }
+.f-tokens { padding-left: 4px; }
+/* без тегов плейсхолдер стоит там же, где текст в обычном инпуте (10px от обводки); после тега — через 8px */
+.f-tokens__input { padding: 0 0 0 4px; }
+.f-tokens__input:first-child { padding-left: 6px; }
+/* тег внутри поля — как тег в блоке Active */
+.f-token {
+  display: flex;
+  height: 24px;
+  padding: 0 6px 0 8px;
+  align-items: center;
+  gap: 4px;
+  max-width: 100%;
+  border-radius: 6px;
+  background: #f1f4f9;
+  color: var(--grey-main);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: normal;
+  white-space: nowrap;
+}
+.f-token:hover { background: #ebecf0; }
+.f-token button { display: grid; place-items: center; flex-shrink: 0; width: 16px; height: 16px; border-radius: 0; color: #666e7a; }
+.f-token button:hover { background: none; color: #192435; }
+.f-token .i { width: 16px; height: 16px; color: currentColor; }
+
+/* select: как input + тень 0 1px 1px rgba(0,0,0,.08); текст до 28px справа, стрелка 24px в 4px от края */
+.f-ms__btn { gap: 0; padding: 0 4px 0 10px; box-shadow: 0 1px 1px rgba(0, 0, 0, .08); }
+.f-ms__value { flex: 1; min-width: 0; }
+
+/* футер: кнопки в 16px от края, зазор 8px */
+.filters__actions { gap: 8px; }
+
+/* ховер на шапку раздела — #F7F7F7; после последнего раздела линии нет */
+.f-sec__head:hover { background: #f7f7f7; }
+.f-sec:last-child { border-bottom: 0; }
+
+/* разделы: шапки стоят на месте; открытие и закрытие — плавный выезд/сворачивание (js/filters.js, Web Animations) */
+.f-sec__body { display: none; flex-direction: column; padding: 8px 16px 24px; }
+.f-sec.is-open .f-sec__body, .f-sec.is-closing .f-sec__body { display: flex; }
+.f-sec__chev, .f-sec.is-open .f-sec__chev { transition: none; }
+.filters__body { overflow-anchor: none; } /* браузер не подкручивает скролл при раскрытии — шапки не прыгают */
+
+/* в поле уже есть хотя бы один тег — плейсхолдер не показываем */
+.f-token ~ .f-tokens__input::placeholder { color: transparent; }
+.f-segs { column-gap: 17px; } /* как сетка полей: колонки по 280px, без полупикселя */
